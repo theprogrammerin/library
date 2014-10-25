@@ -61,9 +61,9 @@ $fsection = str_ireplace($q, $rsection, $section);
 <td width="190"> <?php echo $fauthor; ?></td>
 <td width="190"> <?php echo $fine; ?></td>
 
- <td align="center" class="del"><a title="EDIT"  href="?addBorrower&card_no=<?php echo $row['card_no']; ?>">Edit</a></td>
+ <td align="center" class="del"><a title="EDIT"  href="?addFine&card_no=<?php echo $row['card_no']; ?>&loan_id=<?php echo $row['loan_id']; ?>">Edit</a></td>
   <td class="del">
-  <?php echo '<div align="center"><a href="#" id="'.$row['card_no'].'" class="delbutton" title="Click To Delete">Delete</a></div>'; ?>
+
   </td>
   </tr>
 
