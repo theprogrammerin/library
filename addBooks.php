@@ -5,7 +5,7 @@ include('time.php');
 .dewey{
 	font-size:20px;
 	font-family:Arial, Helvetica, sans-serif;
-	
+
 	font-weight:bold;
 	margin-left:20px;}
 .success{
@@ -108,9 +108,22 @@ $edit=mysql_fetch_array($get);
 <td align="left"><input type="text" style="width:250px;padding:4px;" name="author" value="<?php echo $edit['author_name']; ?>"></td>
 </tr>
 <tr>
+  <td>
+    Author Type
+  </td>
+  <td>:</td>
+  <td colspan="4" align="left">
+    <select name="type">
+        <option value="1">Person</option>
+        <option value="2">Organization</option>
+    </select>
+  </td>
+
+</tr>
+<tr>
 <td>Book Branch</td>
 <td>:</td>
-<td align="left"><select name="bookbranch" style="width:262px;padding:4px;"> 
+<td align="left"><select name="bookbranch" style="width:262px;padding:4px;">
 
 <?php
 include('config.php');
@@ -171,28 +184,28 @@ switch ($branch_name) {
 
 <div style=" width:300px; float:left; margin-left:50px; ">
 <table width="" border="0" style=" border:1px #999 inset; margin-bottom:20px; margin-top:10px;">
- 
+
   <tr>
-  
-  <td  align="right"><input type="submit" name="add" 
+
+  <td  align="right"><input type="submit" name="add"
   <?php if($edit){echo "disabled='disabled'" ;} else{echo "";} ?>
    value="Add" style="padding:8px; width:110px;"></td>
-  
+
   <td  align="right"><input type="submit"
-  <?php if($edit){echo "" ;} else{echo "disabled='disabled'";} 
+  <?php if($edit){echo "" ;} else{echo "disabled='disabled'";}
   if(isset($_GET['view'])){ echo "disabled='disabled'";}else{} ?>
   name="update" value="Update" style="padding:8px; width:110px;"></td>
-    
-  
+
+
  <td>
 <?php if(isset($_GET['view'])){ ?>
 <td  align="right"><a style="text-decoration:none;" href="?searchBooks">
 <input type="button" name="input"
    value="Back to search" style="padding:8px; width:110px;" />
 </a></td>
-    
+
   <?php } ?>
-<?php 
+<?php
 
 
 if(isset($_POST['add'])){
@@ -230,30 +243,30 @@ else{
 	if($c==1){
 	echo "<div class='error'>Book&nbsp;ID&nbsp;already&nbsp;exist</div>";
 		}else{
-		
+
 $insert1="Insert into book(book_id,title)
  values('$_POST[book_id]','$_POST[booktitle]')";
- 
+
 $insert2="Insert into book_copies(book_id, branch_id, no_of_copies)
  values('$_POST[book_id]',".$branch_id.",'$_POST[copies]')";
 
 $insert3="Insert into book_authors(book_id, author_name, type)
  values('$_POST[book_id]','$_POST[author]','".$auth_type."')";
- 
+
 
 
 $rs1=mysql_query($insert1) or die(mysql_error());
 $rs2=mysql_query($insert2) or die(mysql_error());
 $rs3=mysql_query($insert3) or die(mysql_error());
-	
+
 	if($rs1 && $rs2 && $rs3){ ?>
-		
+
 				<script>
 $(document).ready(function(){
     $("#success").fadeIn(1000);
 });
 </script>
-		
+
 	<?php }	}
 	}
 }
@@ -265,7 +278,7 @@ $bookbranch=$_POST['branch_name'];
 $copies=$_POST['no_of_copies'];
 
 include('config.php');
-		
+
 $update1="update book set title='$_POST[booktitle]',book_id='$_POST[book_id]'
 		 where book_id='$_POST[book_id]'";
 $update2="update book_copies set book_id='$_POST[book_id]',branch_id='".$branch_id."',no_of_copies='$_POST[copies]' where book_id='$_POST[book_id]'";
@@ -275,18 +288,18 @@ $update3="update book_authors set book_id='$_POST[book_id]', book_author='$_POST
  $rs_update1=mysql_query($update1);
  $rs_update2=mysql_query($update2);
  $rs_update3=mysql_query($update3);
- 
+
   ?>
     <script>
 $(document).ready(function(){
     $("#update").fadeIn(1000);
 });
 </script>
-	<?php	
-		
+	<?php
+
 		}
 ?>
-	
+
  </td>
   </tr>
 </table>
