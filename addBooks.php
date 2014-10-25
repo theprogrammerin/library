@@ -111,15 +111,7 @@ $edit=mysql_fetch_array($get);
 <td>Book Branch</td>
 <td>:</td>
 <td align="left"><select name="bookbranch" style="width:262px;padding:4px;"> 
-<?php
 
-$auth_type ="2";
-
-if ($authortype="1"){
-	$auth_type="1";
-}
-
-?>
 <?php
 include('config.php');
 $sql="SELECT * FROM library_branch";
@@ -211,6 +203,17 @@ $bookbranch=$_POST['branch_name'];
 $authortype=$_POST['type'];
 $copies=$_POST['no_of_copies'];
 
+
+
+
+$auth_type ="2";
+
+if ($authortype=="1"){
+	$auth_type="1";
+}
+
+
+
 include('config.php');
 
 if(empty($book_id))
@@ -235,7 +238,7 @@ $insert2="Insert into book_copies(book_id, branch_id, no_of_copies)
  values('$_POST[book_id]',".$branch_id.",'$_POST[copies]')";
 
 $insert3="Insert into book_authors(book_id, author_name, type)
- values('$_POST[book_id]','$_POST[author]','$_POST[book_id]')";
+ values('$_POST[book_id]','$_POST[author]','".$auth_type."')";
  
 
 
