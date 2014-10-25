@@ -3,7 +3,7 @@
 <style>
 .searchbox{ position:absolute; margin-top:71px; margin-left:54px;}
 .td{
-	
+
 	text-decoration:none;}
 .a{ text-decoration:none;
 color:#000;}
@@ -15,7 +15,7 @@ color:#000;}
 .dewey{
 	font-size:20px;
 	font-family:Arial, Helvetica, sans-serif;
-	
+
 	font-weight:bold;}
 	hr{
 		background:#999;
@@ -34,6 +34,11 @@ if(isset($_POST))
 
 $q=$_POST['searchword'];
 
+$page = "borrowBooks";
+if(isset($_POST['page'])) {
+	$page = $_POST['page'];
+}
+
 $sql_res="select * from borrower where fname like '$q%' or lname like '$q%' or card_no like '$q%' ";
 }
 
@@ -43,10 +48,10 @@ $items = 0;
 
 <?php while($row=mysql_fetch_array($r))
 {
-	$j="<a href='?borrowBooks&card_no=$row[card_no]' class='a'>";
+	$j="<a href='?$page&card_no=$row[card_no]' class='a'>";
 	//$d="<a href='?del&idnumber=$row[idnumber]' class='a'>";
-	
-		 $items++; 
+
+		 $items++;
 
 $idnumber=$row['card_no'];
 $fname=$row['fname'];
@@ -64,7 +69,7 @@ $flname = str_ireplace($q, $rlname, $lname);
 
 <table width="412" border="0" class="f" cellspacing="1" style=" ">
  <tr bgcolor="" class="hr" >
- 
+
 <td style="font-size:13px; font-weight:bold; color:#666;" width="346"><?php echo $j;  ?>
 <div class="td"><div style="padding-top:0;">
 <?php echo $ffname; ?>&nbsp;<?php echo $flname; ?>&nbsp;<?php echo $fmi; ?></div>

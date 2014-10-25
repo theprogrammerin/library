@@ -1,62 +1,171 @@
+<?php
+require_once('calendar/classes/tc_calendar.php');
+?>
+
+<?php
+  include_once("config.php");
+  if($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $card_no=$_POST['studentid'];
+      $loan_id=$_POST['loan_id'];
+      $fine_amt=$_POST['fine_amt'];
+      $paid = $_POST['paid'];
+      if(!empty($_POST['fine_amt']))
+    {
+
+      $query = "SELECT * FROM fines WHERE loan_id = $loan_id";
+      $rs = mysql_query($query);
+
+      if(mysql_num_rows($rs) > 0) {
+        $query = "UPDATE fines SET fine_amt = $fine_amt, paid = $paid WHERE loan_id = $loan_id";
+      }
+      else {
+        $query = "INSERT INTO fines(loan_id, fine_amt, paid) VALUES ($loan_id, $fine_amt, $paid)";
+      }
+      $rs = mysql_query($query);
+      }
+    }
+  ?>
+
+<link href="calendar/calendar.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="calendar/calendar.js"></script>
 <script>
-  $(document).ready(function(){
-  $("#close").click(function(){
-    $("#update").fadeOut("slow");
-	window.location='?searchBorrower';
-  });
-  
+  $("#id").click(function(){
+    $("#success").fadeIn(2000);
 });
-/*ajax combo*/
-var XMLHttpRequestObject=false;
-function getsection(yr_id)
-{
-if(window.XMLHttpRequest)
-{
-XMLHttpRequestObject=new XMLHttpRequest();
-}
-else if(window.ActiveXObject)
-{
-XMLHttpRequestObject=new ActiveXObject("Microsoft.XMLHTTP");
-} 
-XMLHttpRequestObject.onreadystatechange=function()
-{
-if (XMLHttpRequestObject.readyState==4 && XMLHttpRequestObject.status==200)
-{
-document.getElementById("div").innerHTML=XMLHttpRequestObject.responseText;
-}
-}
-XMLHttpRequestObject.send();
-}
-/*ajax combo*/
+
+$("#default").click(function(){
+    $("#def").fadeIn(2000);
+});
+
+ $(document).ready(function(){
+  $("#closeempty").click(function(){
+    $("#divempty").fadeOut("slow");
+  });
+});
 </script>
-
-
-
 <script>
 $(document).ready(function(){
-  $("#closes").click(function(){
+  $("#close").click(function(){
     $("#success").fadeOut("slow");
   });
 });
 
+  $("#id").click(function(){
+    $("#error").fadeIn(2000);
+});
 </script>
+<script>
+$(document).ready(function(){
+  $("#closeerror").click(function(){
+    $("#error").fadeOut("slow");
+  });
+});
 
-<div id="update" style=" z-index:20; position:absolute; background:url(images/trans_bg.png); width:100%;height:100%;display:none;">
-<div class="boxaction" style="margin-top:-20px;">
-<div class="headbox">
-<img src="icons/check-big.png" height="25" style="margin-top:8px; float:left; margin-left:10px;"/>
-<div style=" margin-left:7px; margin-top:13px; color:#030; font-size:15px; font-family:Verdana, Geneva, sans-serif; font-weight:bold;float:left">Success</div>
-</div>
+</script>
+<script>
+$(document).ready(function(){
+  $("#closeerror2").click(function(){
+    $("#error2").fadeOut("slow");
+  });
+});
 
-<div style="font-size:15px; padding-top:40px; font-family:Arial, Helvetica, sans-serif; text-align:center">Record Updated
-</div>
+</script>
+<!--success-->
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/ajax.js"></script>
+<script type="text/javascript" src="js/jquery.watermarkinput.js"></script>
+<script type="text/javascript">
 
-<div class="btnbox" id="close" style="cursor:pointer;">
-<div style="font:14px; font-family:Verdana, Geneva, sans-serif; color:#FFF; font-weight:bold; text-align:center; margin-top:5px;">OK</div>
-</div>
+$(document).ready(function(){
 
-</div>
-</div>
+$(".search").keyup(function()
+{
+var searchbox = $(this).val();
+var dataString = 'searchword='+ searchbox + '&page=addFine';
+
+if(searchbox==='')
+{
+   $.ajax({
+type: "POST",
+url: 'searchstudent.php',
+data: dataString,
+cache: false,
+success: function(h)
+
+{
+
+$("#display").html(h).hide();
+	}});
+
+
+}
+else
+{
+$.ajax({
+type: "POST",
+url: 'searchstudent.php',
+data: dataString,
+cache: false,
+success: function(html)
+
+{
+
+$("#display").html(html).show();
+	}});
+
+
+}return false;
+
+
+});
+});
+
+jQuery(function($){
+   $("#searchbox").Watermark("Search StudentID, Name");
+   });
+
+
+
+   </script>
+    <script language="javascript" type="text/javascript">
+function timing()
+{
+var a=new Date();
+h=a.getHours();
+m=a.getMinutes();
+s=a.getSeconds();
+
+if(s<=9) s="0"+s;
+if(m<=9) m="0"+m;
+if(h<=9) h="0"+h;
+
+
+time=a;
+
+document.frm.mytime.value=time;
+
+
+
+setTimeout("timing()",1000);
+
+
+
+}
+
+function updateFine() {
+
+  card_no = $("[name=studentid]").val();
+  loan_id = $("#loan_id").val();
+
+  path = "./?addFine&card_no=" + card_no + "&loan_id=" + loan_id;
+
+  window.location = path;
+
+
+
+}
+</script><!--time-->
+
 
 
 <div id="success" style=" z-index:20; position:absolute; background:url(images/trans_bg.png); width:100%;height:100%;display:none;">
@@ -66,224 +175,244 @@ $(document).ready(function(){
 <div style=" margin-left:7px; margin-top:13px; color:#030; font-size:15px; font-family:Verdana, Geneva, sans-serif; font-weight:bold;float:left">Success</div>
 </div>
 
-<div style="font-size:15px; padding-top:40px; margin-left:30px; font-family:Arial, Helvetica, sans-serif;">Successfully Added
+<div style="font-size:15px; padding-top:40px; margin-left:30px; font-family:Arial, Helvetica, sans-serif;">Your Borrow has been Registered
 </div>
-<a href="?addBorrower" style="text-decoration:none;">
-<div class="btnbox" id="closes">
+
+<div class="btnbox" id="close">
 <div style="font:14px; font-family:Verdana, Geneva, sans-serif; color:#FFF; font-weight:bold; text-align:center; margin-top:5px;">OK</div>
 </div>
-</a>
+
 </div>
 </div><!--succes box-->
+<div id="error" style=" z-index:20; position:absolute; background:url(images/trans_bg.png); width:100%;height:100%;display:none;">
+<div class="boxaction" style="margin-top:-20px;">
+<div class="headbox">
+<img src="icons/error.png" height="25" style="margin-top:8px; float:left; margin-left:10px;"/>
+<div style=" margin-left:7px; margin-top:13px; color:#030; font-size:15px; font-family:Verdana, Geneva, sans-serif; font-weight:bold;float:left">Error</div>
+</div>
 
+<div style="font-size:15px; padding-top:40px; margin-left:20px; margin-right:20px; font-family:Arial, Helvetica, sans-serif; text-align:center">Tulo sa ang limit karun
+</div>
 
-<?php
-$timezone = "America/Chicago";
-if(function_exists('date_default_timezone_set')) date_default_timezone_set($timezone);
-$checkin = date('Y');
-$checkout = date('Y', strtotime("+1 year", strtotime($checkin)));
-?>
+<div class="btnbox" id="closeerror">
+<div style="font:14px; font-family:Verdana, Geneva, sans-serif; color:#FFF; font-weight:bold; text-align:center; margin-top:5px;">OK</div>
+</div>
+
+</div>
+</div><!--error1 box-->
+<div id="error2" style=" z-index:20; position:absolute; background:url(images/trans_bg.png); width:100%;height:100%;display:none;">
+<div class="boxaction" style="margin-top:-20px;">
+<div class="headbox">
+<img src="icons/error.png" height="25" style="margin-top:8px; float:left; margin-left:10px;"/>
+<div style=" margin-left:7px; margin-top:13px; color:#030; font-size:15px; font-family:Verdana, Geneva, sans-serif; font-weight:bold;float:left">Error</div>
+</div>
+
+<div style="font-size:15px; padding-top:40px; margin-left:20px; margin-right:20px; font-family:Arial, Helvetica, sans-serif; text-align:center">You Can Borrow Only 1 types of Books
+</div>
+
+<div class="btnbox" id="closeerror2">
+<div style="font:14px; font-family:Verdana, Geneva, sans-serif; color:#FFF; font-weight:bold; text-align:center; margin-top:5px;">OK</div>
+</div>
+
+</div>
+</div><!--error2 box-->
+<div id="divempty" style=" z-index:20; position:absolute; background:url(images/trans_bg.png); width:100%;height:100%;display:none;">
+<div class="boxaction" style="margin-top:-20px;">
+<div class="headbox">
+<img src="icons/error.png" height="25" style="margin-top:8px; float:left; margin-left:10px;"/>
+<div style=" margin-left:7px; margin-top:13px; color:#030; font-size:15px; font-family:Verdana, Geneva, sans-serif; font-weight:bold;float:left">Error</div>
+</div>
+
+<div style="font-size:15px; padding-top:40px; margin-left:20px; margin-right:20px; font-family:Arial, Helvetica, sans-serif; text-align:center">Select Book
+</div>
+
+<div class="btnbox" id="closeempty" style="cursor:pointer;">
+<div style="font:14px; font-family:Verdana, Geneva, sans-serif; color:#FFF; font-weight:bold; text-align:center; margin-top:5px;">OK</div>
+</div>
+
+</div>
+</div><!--empty box-->
 <style>
-input{
-	padding:3px;}
-	
-	.dewey{
+
+.dewey{
 	font-size:20px;
 	font-family:Arial, Helvetica, sans-serif;
-	
+
 	font-weight:bold;}
 	hr{
 		background:#999;
 		color:#CCC;}
-.success{
-	color:#060;
-	margin-top:15px;
-	margin-left:20px;
-	float:left;
-	font-size:12px;
-	font-family:Verdana, Geneva, sans-serif;}
-	.asd{ width:900px;height:40px;}
-	.back{ background:#EEE; height:27px; width:100px;}
-</style>
-<?php 
-include('config.php');
-if(isset($_GET['card_no'])){
-	$studentid=$_GET['card_no'];
-	
-	
-	$query1 = "select * from borrower where card_no=$_GET[card_no]";
-$get=mysql_query($query1);
-$getedit=mysql_fetch_array($get);
-}
-?>
+		.searchdiv{
+			width:700px;
+			float:left;}
+.deweydiv{
 
-<div class="asd">
- <ul id="MenuBar1" class="MenuBarHorizontal" >
-<table border="0" align="right" style="margin-right:10px;"><tr>
-<td width="100" align="center">
-</td>
-<td>
-<!--
-  <li><a class="MenuBarItemSubmenu" href="">
-  <img src="icons/b_tblops.png" height="13" />
-  Settings</a>
-    <ul>
-     <!-- <li><a class="MenuBarItemSubmenu" href="#">Item 3.1</a>-->
-        
-  <!--
-      <li ><a href="?addBorrower&addtype"><img src="icons/b_props.png" height="14" /> &nbsp;Add Type</a></li>
-      <li><a href="?addBorrower&year/section"><img src="icons/s_db.png" height="14" />&nbsp;Year/section</a></li>
-    </ul>
-  </li>
--->
-</td></tr></table>
-</ul>
+	height:300px;
+	margin-left:30px;
+	width:750px;
+	float:left;}
+	.error{
+		color:#C00;
+		font-size:15px;
+		font-family:Verdana, Geneva, sans-serif;}
+.dleft{
+
+	height:300px;
+	width:449px;
+	float:left;
+	}
+.dright{
+	height:300px;
+	width:300px;
+	float:left;
+	}
+	.set{ margin-right:70px; height:20px; width:300px; float:right;}
+</style>
+<div class="set"></div>
+
+<form action="" name="frm" method="post">
+
+<div class="searchdiv">
+<table border="0" style="border:1px inset #999; font-size:12px; font-family:Arial, 'Arial Black', 'Arial Narrow'; margin-top:20px; margin-left:50px; float:left;">
+<tr><td colspan="2">
+<input type="text" style="width:400px; padding:4px;" name="<?php echo time('y-m-d') ?>" class="search" id="searchbox" />
+</td></tr>
+</table>
+
 </div>
 
-<?php if(isset($_GET['addtype'])){ ?>
-</script>
-<style>
-
-.sds:nth-child(2n+1){
-	
-	background-color:#CCC;}
-	.sds:hover{ background:#C1C1FF;}
-</style>
-<?php }
-else{
-?>
-<form action="" id="login" name="login"  method="post" enctype="multipart/form-data">
-
-<table width="900" border="0" cellspacing="3" style=" font-size:13px; margin-left:20px; text-align:right; font-family:Verdana, Geneva, sans-serif; font-weight:bold;">
-  <tr>
-    <td width="86" height="50">Card No. </td>
-    <td width="6">:</td>
-    <td width="202" align="left">
-    <input type="text" disabled="disabled"  value="<?php echo $getedit['card_no']; ?>" name="card_no"></td>
-    <td colspan="" align="right">
-
-     </td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td></td>
-     <td>
-        
-     </td>
-  </tr>
-  <tr>
-    <td>First Name</td>
-    <td>:</td>
-    <td align="left"><input type="text" name="fname" value="<?php echo $getedit['fname']; ?>"></td>
-    <td width="108" >Last Name</td>
-    <td width="6">:</td>
-    <td width="144" align="left"><input  type="text" name="lname" value="<?php echo $getedit['lname']; ?>"></td>
-    <td width="114"> </td>
-    <td width="5"></td>
-    <td width="181" align="left"></td>
-  </tr>
-  <tr>
-    <td>Address</td>
-    <td>:</td>
-    <td align="left">
-    <input  type="text" name="address" value="<?php echo $getedit['address']; ?>">
-    </td>
-    <td>City</td>
-    <td>:</td>
-    <td align="left"><input type="text" name="city" value="<?php echo $getedit['city']; ?>"></td>
-    <td>State</td>
-    <td>:</td>
-    <td align="left">
-    <input  type="text" name="state" value="<?php echo $getedit['state']; ?>">
-    </td>
-  
-  </tr>
-  <tr>
-    <td>Phone</td>
-    <td>:</td>
-    <td align="left">
-    <input  type="text" name="phone" value="<?php echo $getedit['phone']; ?>">
-    </td>
-    <td colspan="1"></td>
-    <td></td>
-    <td align="left" colspan="2">
-   
-   
-  	</td>
-
-    
-  </tr>
-  <tr>
-   
-  </tr>
-</table>
-
-
-
-<table width="" align="left" border="0" style=" margin-top:20px; border:1px #999 inset; margin-bottom:10px; margin-left:50px;">
-  <tr>
-  <td  align="right"><input id="submit"<?php if(isset($getedit['card_no'])){ ?> disabled="disabled" <?php }else{} ?> type="submit" name="addborrower" value="Add" style="padding:8px; width:110px;"></td>
-  <td  align="right"><input <?php if(isset($getedit['card_no'])){ }else{?> disabled="disabled" <?php } ?> type="submit"  name="update" value="Update" style="padding:8px; width:110px;"></td>
-    <td  align="right"><input type="submit" value="Clear" name="clear" style="padding:8px; width:110px;"></td> 
-  </tr>
-</table>
-
-</form>
-<?php
-	if(isset($_POST['update'])){
-	//$card_no=$_POST['card_no'];
-	$lname=$_POST['lname'];
-	$fname=$_POST['fname'];
-	$address=$_POST['address'];
-	$city=$_POST['city'];
-	$state=$_POST['state'];
-	$phone=$_POST['phone'];
-	
+<div class="deweydiv">
+<div class="dleft">
+<?php if(isset($_GET['card_no'])){
 	include('config.php');
-	
-$update="
-update borrower set
-fname ='$_POST[fname]',
-lname='$_POST[lname]',
-address='$_POST[address]',
-city='$_POST[city]',
-state='$_POST[state]',
-phone='$_POST[phone]'
-where card_no=$_GET[card_no]";
+	$id=$_GET['card_no'];
+	$sql="SELECT * FROM borrower where card_no=$id";
+$rs=mysql_query($sql);
+$get=mysql_fetch_array($rs);
 
-$updaters=mysql_query($update) or die (mysql_error());
-if($updaters){ ?>
-	
-	<script>
-$(document).ready(function(){
-    $("#update").fadeIn(1000);
-});
-var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif", imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});
-    </script>
-<?php	}}
-	 ?>
-	 
-         <?php
- include('config.php');
+	} ?>
 
-	if(isset($_POST['addborrower'])){
-			
-		
-$addborrow="Insert into `borrower`(fname,lname,address,city,state,phone)
- values('$_POST[fname]','$_POST[lname]','$_POST[address]', '$_POST[city]', '$_POST[state]','$_POST[phone]'     )";
-  
-//
-$rs=mysql_query($addborrow) or die (mysql_error());
-//$set=mysql_query($insert) or die (mysql_error());
-	if($rs){ ?>
-		<script>
-$(document).ready(function(){
-    $("#success").fadeIn(1000);
-});
-</script>
-<?php	}
-	}
-	
+<table width="420" border="0" style="font-size:12px; font-family:Arial, 'Arial Black', 'Arial Narrow'; font-weight:bold;border:1px inset #999; margin-top:5px; margin-left:20px; float:left;">
+</tr>
+<tr><td>Name</td><td>Card No.</td>
+</tr>
+<tr>
+<td>
+<input type="text" readonly="readonly" value="<?php echo $get['fname']."&nbsp;".$get['lname']; ?>" name="name" style="width:200px; padding:4px;" onclick="clear()" class="search" id="searchbox" />
+</td><td>
+<input type="text" readonly="readonly" value="<?php echo $get['card_no']; ?>" name="studentid" style="width:100px; padding:4px;" onclick="clear()" class="search" id="searchbox" />
+</td>
+</tr>
+</table>
+<table border="0" wi style="font-size:12px; font-family:Arial, 'Arial Black', 'Arial Narrow'; font-weight:bold; border:inset #999 1px;width: 420px;  margin-top:10px; margin-bottom:20px; float:left; margin-left:20px;">
+<tr><td colspan="3">Loan ID</td></tr>
+<tr>
+<td colspan="3">
+<select id="loan_id" name="loan_id"
+<?php if(isset($_GET['card_no'])) {?>
+<?php }else{ ?> disabled="disabled"<?php }  ?> style=" padding:4px;" class="com" onChange="updateFine(this)">
+<option ></option>
+<?php
+
+include('config.php');
+$sql="SELECT * FROM book_loans INNER JOIN book ON book_loans.book_id = book.book_id WHERE card_no = {$_GET['card_no']}";
+echo $sql;
+$rs=mysql_query($sql);
+$class=0;
+
+while($row=mysql_fetch_array($rs)){
+	$class++;
+ ?>
+<option value="<?php echo $row['loan_id']; ?>"<?php if(isset($_GET['card_no']) && $_GET['loan_id'] == $row["loan_id"]) {?>
+selected <?php } ?> >
+  <?php
+    echo $row['loan_id']." - ".$row['title'];
+  ?>
+</option>
+<?php
 }
 ?>
-	
+</select>
+<br/><br/>
+</td>
+</tr>
+<tr><td colspan="3">Fine Amount</td></tr>
+<tr>
+<td colspan="3">
+  <?php
+  if(!empty($_GET['loan_id'])) {
+    $sql = "SELECT * FROM fines WHERE loan_id = {$_GET['loan_id']}";
+    $rs=mysql_query($sql);
+    $data = mysql_fetch_array($rs);
+    $fine = 0;
+    if($data) {
+      $fine = $data["fine_amt"];
+    }
+  ?>
+    <input type="text" name="fine_amt" value="<?= $fine ?>" />
+    <select name="paid">
+      <option value="0" <?php if($data["paid"] == 0) {?>
+selected <?php } ?> >UnPaid</option>
+      <option value="1" <?php if($data["paid"] == 1) {?>
+selected <?php } ?>>Paid</option>
+    </select>
+  <?php } else { ?>
+    <input type="text" name="fine_amt" value="" disabled/>
+    <select name="paid">
+      <option value="0" selected>UnPaid</option>
+      <option value="1">Paid</option>
+    </select>
+  <?php } ?>
+
+  <br/>
+  <br/>
+</td>
+</tr>
+</table>
+<br/>
+<table border="0" style=" font-weight:bold;font-size:12px; font-family:Arial, 'Arial Black', 'Arial Narrow'; margin-left:20px; float:left; margin-top:20px; border:1px inset #999;">
+<tr>
+<td>
+
+<input type="submit" name="borrow" style="padding:9px; width:200px;" value="Update Fine" /></td>
+</tr>
+</table>
+
+</div>
+<span id="ass"></span>
+
+</td>
+<td class="value" align="center" style="width:25px;">
+ <div id="id" title="Change default value">
+  <a href="" style="margin-right:10px;" id=""
+    onclick="OpenPopUp(id,'','',300,100);" class='trnone'>
+
+<img src="icons/b_edit.png"  />
+</a>
+</div>
+</td>
+</tr>
+</table>
+
+</div>
+<div id="display">
+
+</div>
+</form>
+
+<table align="left" border="0" style="float:left; margin-left:20px; margin-top:20px; ">
+<tr>
+<td>
+
+  <?php
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+      echo "UPDATED";
+
+
+    }
+    ?>
+
+</td>
+</tr>
+</table>
