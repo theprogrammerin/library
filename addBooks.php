@@ -71,7 +71,7 @@ $(document).ready(function(){
 include('config.php');
 if(isset($_GET['book_id'])){
 	$book_id=$_GET['book_id'];
-	$query1 = "select * from book where book_id=$book_id";
+	$query1 = "select * from book RIGHT JOIN book_authors ON book.book_id = book_authors.book_id WHERE book.book_id=$book_id";
 $get=mysql_query($query1);
 $edit=mysql_fetch_array($get);
 
@@ -114,8 +114,12 @@ $edit=mysql_fetch_array($get);
   <td>:</td>
   <td colspan="4" align="left">
     <select name="type">
-        <option value="1">Person</option>
-        <option value="2">Organization</option>
+        <option value="1" <?php if($edit['type']==1){ ?>
+selected="selected"
+<?php } ?>>Person</option>
+        <option value="2" <?php if($edit['type']==2){ ?>
+selected="selected"
+<?php } ?>>Organization</option>
     </select>
   </td>
 
