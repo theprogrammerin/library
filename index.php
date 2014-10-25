@@ -23,7 +23,7 @@ include("config.php");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title> Library Management System</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
-<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.21.custom.css" rel="stylesheet" />	
+<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
 
 </head>
 
@@ -37,7 +37,7 @@ include("config.php");
             $('.menu').fixedMenu();
         });
         </script>
-      
+
         <script src="js/organictabs.jquery.js"></script>
 
 </head>
@@ -45,7 +45,7 @@ include("config.php");
 <body>
 
 <div class="header">
-  
+
 </div>
 <?php include('menu.php'); ?>
 <div class="wrapper">
@@ -58,6 +58,8 @@ include("config.php");
 <?php if(isset($_GET['searchBooks'])){ ?>Search Books<?php } ?>
 <?php if(isset($_GET['addBorrower'])){ ?>Add Borrower<?php } ?>
 <?php if(isset($_GET['searchBorrower'])){ ?>Search Borrower<?php } ?>
+<?php if(isset($_GET['addFine'])){ ?>Add Fine<?php } ?>
+<?php if(isset($_GET['searchFine'])){ ?>Search Fine<?php } ?>
 <?php if(isset($_GET['returnBooks'])){ ?>Return Books<?php } ?>
 <?php if(isset($_GET['unreturnbook'])){ ?>unreturn Borrower<?php } ?>
 <?php if(isset($_GET['unreturnedBooks'])){ ?>List of Unreturned Books<?php } ?>
@@ -70,44 +72,50 @@ include("config.php");
 <?php
 
 if(isset($_GET['addBooks'])){
-	 include('addBooks.php'); 
+	 include('addBooks.php');
 	}
 elseif(isset($_GET['searchBooks'])){
-	 include('searchBooks.php'); 
+	 include('searchBooks.php');
 	}
 elseif(isset($_GET['borrowBooks'])){
-	 include('borrowBooks.php'); 
+	 include('borrowBooks.php');
 	}
 elseif(isset($_GET['addBorrower'])){
-	 include('addBorrower.php'); 
+	 include('addBorrower.php');
 	}
 elseif(isset($_GET['searchBorrower'])){
-	 include('searchBorrower.php'); 
+	 include('searchBorrower.php');
 	}
+elseif(isset($_GET['addFine'])){
+   include('addFine.php');
+  }
+elseif(isset($_GET['searchFine'])){
+   include('searchFine.php');
+  }
 elseif(isset($_GET['returnBooks'])){
-	 include('returnBooks.php'); 
+	 include('returnBooks.php');
 	}
 	elseif(isset($_GET['unreturnbook'])){
-	 include('unreturnbook.php'); 
+	 include('unreturnbook.php');
 	}
 	elseif(isset($_GET['unreturnedBooks'])){
-	 include('unreturnedBooks.php'); 
+	 include('unreturnedBooks.php');
 	}
 	elseif(isset($_GET['print'])){
-	 include('print.php'); 
+	 include('print.php');
 	}
 	elseif(isset($_GET['Booklist'])){
-	 include('Booklist.php'); 
+	 include('Booklist.php');
 	}
 
 elseif(isset($_GET['overdue'])){
-	 include('overdue.php'); 
+	 include('overdue.php');
 	}
 
 /*----------------------------------------------*/
-	
-	
-	
+
+
+
 /*----------------------------------------------*/
 	else{ ?>
 <center>
@@ -120,8 +128,8 @@ elseif(isset($_GET['overdue'])){
 
 </center><?php }
 
-	
-	 //include('login.php'); 
+
+	 //include('login.php');
 
  ?>
 <?php if(isset($_GET['searchBooks'])){}
@@ -131,7 +139,7 @@ else{ ?>
     </div>
 <div class="footer">
 <div class="leftfoot"></div>
-<div class="bodyfoot"> 
+<div class="bodyfoot">
 </div>
 <div class="rightfoot"></div>
 </div>

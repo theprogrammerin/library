@@ -20,7 +20,7 @@ margin-left:27px;}
 
 </style>
 
- 
+
 
 <div class="menus">
 <div id="hotel">
@@ -29,24 +29,24 @@ margin-left:27px;}
         <ul>
         <li>
                 <a href="#"><span class="img"></span>&nbsp;Home&nbsp;<span class="arrow"></span>&nbsp|</a>
-                
+
                 <ul>
-                   
+
                <li><a href="index.php">Home</a></li>
                     <li><a href="logout.php">Logout/Signout</a></li>
-           
-             
+
+
                 </ul>
             </li>
             <li>
                 <a href="#"><span class="img"></span>&nbsp;Book Borrow/Return<span class="arrow"></span></a>
-                
+
                 <ul>
                     <li><a href="?borrowBooks">Borrow Books</a></li>
                     <li><a href="?returnBooks">Return Books</a></li>
-               
-           
-             
+
+
+
                 </ul>
             </li>
             <li>
@@ -65,27 +65,34 @@ margin-left:27px;}
                 </ul>
             </li>
             <li>
+                <a href="#"><span class="img"></span>&nbsp;Fines<span class="arrow"></span></a>
+                <ul>
+                    <li><a href="?addFine">Add Fine</a></li>
+                    <li><a href="?searchFine">View Fine</a></li>
+                </ul>
+            </li>
+            <li>
                 <a href="#"><span class="img"></span>&nbsp;View<span class="arrow"></span></a>
                 <ul>
                     <li><a href="?unreturnedBooks">Unreturn Books</a></li>
 
-		    <li><a href="?overdue">OverDue Books</a></li>                     
-                  
+		    <li><a href="?overdue">OverDue Books</a></li>
+
                 </ul>
             </li>
-     <!--     
+     <!--
             <li><div id="load_tweets"></div>
                 <a href="#">
-              
+
                 <span class="img"><img src="icons/b_docs.png"width='20px'  height='18px' style=" padding-top:3px;"></span>&nbsp;Book Reserve<span class="arrow"></span></a>
                 <ul>
                     <li>
                     <span id="loadreserved"></span>
 					<?php //include('reservedbook.php'); ?>
                     </li>
-                
-                    
-                  
+
+
+
                 </ul>
             </li>
              <li>
@@ -93,9 +100,9 @@ margin-left:27px;}
                 <span class="img"><img src="icons/b_tblops.png"width='20px'  height='18px' style=" padding-top:3px;"></span>&nbsp;Settings<span class="arrow"></span></a>
                 <ul>
                     <li><a href="?backupdatabase">Backup Database</a></li>
-         
-    -->                
-                  
+
+    -->
+
                 </ul>
             </li>
         </ul>
@@ -105,4 +112,3 @@ margin-left:27px;}
 		</div>
         </div></div>
 
-     
