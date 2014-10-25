@@ -12,9 +12,9 @@ $theDate  = date("m/d/y");
 <?php
 include('config.php');
 if(isset($_GET['borrowid'])){
-	
-	$q=mysql_query("select * from tblborrow where borrowid='".$_GET['borrowid']."'");
-	
+
+	$q=mysql_query("select * from book_loans where loan_id='".$_GET['borrowid']."'");
+
 	$name=mysql_fetch_array($q)or die(mysql_error());
 
 	}
@@ -31,10 +31,10 @@ Borrowers Id:
 <input type="text" readonly="readonly" name="borrowersid" style="padding:4px; width:250px;" value="<?php echo $name['studentid']; ?>"><br/>
 </td></tr>
 <?php
-$q=mysql_query("select * from tblborrower where studentid='".$name['studentid']."'");
-	
+$q=mysql_query("select * from borrower where card_no='".$name['card_no']."'");
+
 	$id=mysql_fetch_array($q)or die(mysql_error());
-		
+
  ?>
  <tr><td>
 Borrowers Name:
@@ -50,7 +50,7 @@ Date Due:
 </td><td>
 <input type="text" readonly="readonly" name="datedue" style="padding:4px; width:250px;" value="<?php echo date_format(date_create($name['duedate']), 'F d Y'); ?>" />
 </td></tr>
-<?php 
+<?php
 
 include('config.php');
 $sql="SELECT * FROM tblpayment";
@@ -94,7 +94,7 @@ Over due book(<small>Base on day return</small>)
 </td></tr>
 <tr><td>
 Php
-</td> 
+</td>
 <td><input type="text" readonly="readonly" value="<?php echo number_format($numberDays*$rowpay['amount'],2); ?>"></td></tr>
 </table>
 
@@ -108,13 +108,13 @@ Php
 
 <?php
 if(isset($_POST['resibo'])){
-	
+
 	/*$borrowersid=$_POST['borrowersid'];
 	$datedue=$_POST['datedue'];
 	$datereturn=$_POST['datereturn'];
 	$totaldays=$_POST['totaldays'];
 	$total=$_POST['total'];
-	
+
 $sql="insert into tblreciept (borrowersid,datedue,datereturn,totaldays,totalpay) values(
 	'".$borrowersid."',
 	'".$datedue."',
@@ -122,34 +122,34 @@ $sql="insert into tblreciept (borrowersid,datedue,datereturn,totaldays,totalpay)
 	'".$totaldays."',
 	'".$total."'
 	)";
-			
+
 	$pay=mysql_query($sql) or die (mysql_error());
-	if($pay){*/ 
-	
+	if($pay){*/
+
 	?>
 
     		<script>
-$(document).ready(function(){ 
+$(document).ready(function(){
  $("#div5").fadeIn(1000);
-	
 
-  
+
+
 });
 </script>
-		<?php 
+		<?php
 	//	}
 	?>
-    
-			
+
+
 	<?php
 	}
 	if(isset($_GET['print/save'])){?>
 		<script>
-$(document).ready(function(){ 
+$(document).ready(function(){
  $("#div5").fadeIn(1000);
-	
 
-  
+
+
 });
 </script>
 	<?php
@@ -157,9 +157,9 @@ $(document).ready(function(){
 ?>
 
 
-<?php 
+<?php
 /*if(isset($_POST['pay'])){
- include('config.php'); 
+ include('config.php');
 	$borrowersid=$_POST['borrowersid'];
 	$datedue=$_POST['datedue'];
 	$datereturn=$_POST['datereturn'];
@@ -174,7 +174,7 @@ $sql="insert into tblreciept (borrowersid,datedue,datereturn,totaldays,totalpay)
 	'".$totaldays."',
 	'".$total."'
 	)";
-			
+
 	$pay=mysql_query($sql) or die (mysql_error());
 	if($pay){
 		echo "success";

@@ -4,7 +4,7 @@
 
 $(document).ready(function(){
 
-$(".search").keyup(function() 
+$(".search").keyup(function()
 {
 var searchbox = $(this).val();
 var dataString = 'searchword='+ searchbox;
@@ -23,7 +23,7 @@ success: function(h)
 $("#display").html(h).hide();
 	}});
 
-  
+
 }
 else
 {
@@ -40,7 +40,7 @@ $("#display").html(html).show();
 	}});
 
 
-}return false;    
+}return false;
 
 
 });
@@ -51,7 +51,7 @@ $("#display").html(html).show();
 <style>
 
 .trme:nth-child(2n+1){
-	
+
 	background-color:#CCC;
 
 }
@@ -61,7 +61,7 @@ $("#display").html(html).show();
 .dewey{
 	font-size:20px;
 	font-family:Arial, Helvetica, sans-serif;
-	
+
 	font-weight:bold;}
 	hr{
 		background:#999;
@@ -90,10 +90,10 @@ $("#display").html(html).show();
 	margin-top:30px;}
 .trdiv{
 	text-decoration:none;
-	
+
 	}
 
-	
+
 .trme:hover{
 	background:#D6D6D6;}
 .trme{text-decoration:none; color:#000; font-size:12px; font-family:Verdana, Geneva, sans-serif;}
@@ -110,7 +110,7 @@ $("#display").html(html).show();
 
 include('config.php');
 if(isset($_GET['card_no'])){
-	
+
 	$q=mysql_query("select * from borrower where card_no='".$_GET['card_no']."'");
 	$name=mysql_fetch_array($q)or die(mysql_error());
 
@@ -121,10 +121,10 @@ if(isset($_GET['card_no'])){
 <table width="360" border="0" align="center" style="margin-top:30px; float:right; margin-right:250px; " >
   <tr>
     <td align="center" style="font-size:20px;  font-weight:bold;font-family:Arial, 'Arial Black', 'Arial Narrow';">The University of Texas at Dallas</td>
-   
+
   </tr>
   <tr>
-    <td style="font-size:17px; font-weight:bold; font-family:Arial, 'Arial Black', 'Arial Narrow';" align="center">Richardson, Texas</td>   
+    <td style="font-size:17px; font-weight:bold; font-family:Arial, 'Arial Black', 'Arial Narrow';" align="center">Richardson, Texas</td>
   </tr>
   <tr>
     <td height="50" align="center" style="font-size:22px; font-family:Arial, 'Arial Black', 'Arial Narrow';">Borrower's Record</td>
@@ -138,27 +138,27 @@ if(isset($_GET['card_no'])){
 
 <script>
 jQuery(function($){
-   $("#searchbox").Watermark(<?php if(isset($_GET['card_no'])){?> 
+   $("#searchbox").Watermark(<?php if(isset($_GET['card_no'])){?>
    "<?php echo $name['fname'];?> <?php echo $name['lname']; ?> <?php echo $name['card_no']; ?>"
 	<?php }else{ ?>
 	"Search First Name,Last Name, Card No."
 	<?php } ?>);
    });
-   
+
 </script>
 
 <table align="center" style="margin-left:20px;"  width="430" border="0">
   <tr>
     <td style="font-size:15px; font-family:Arial, 'Arial Black', 'Arial Narrow'; font-weight:bold;">Name</td><td>:</td>
     <td width="450" style="font-size:15px; font-family:Arial, 'Arial Black', 'Arial Narrow'; ">
-    <div class="searchdiv"><input type="text" class="search" id="searchbox" style="  width:490px; padding:4px; border:1px #CCC solid; color:#000; font-size:15px;" name="<?php echo time('y-m-d') ?>" 
-    
+    <div class="searchdiv"><input type="text" class="search" id="searchbox" style="  width:490px; padding:4px; border:1px #CCC solid; color:#000; font-size:15px;" name="<?php echo time('y-m-d') ?>"
+
     />
 </div>
 <div id="display">
 
 </div>
-	
+
 	</td>
   </tr>
   <tr>
@@ -179,10 +179,10 @@ jQuery(function($){
 	     //alert("Pardeep")
 var left = (screen.width/2)-(w/2);
 var top = (screen.height/2)-(h/2);
-      var targetWin =  window.open('http://localhost/DBMS_Proj/returnbookpopup.php?borrowid=' + borrowid, 'name', 'location=no,menubar=no,wiscrollbars=no,resizable=no,fullscreen=no,width='+w+', height='+h+', top='+top+', left='+left);
+      var targetWin =  window.open('./returnbookpopup.php?borrowid=' + borrowid, 'name', 'location=no,menubar=no,wiscrollbars=no,resizable=no,fullscreen=no,width='+w+', height='+h+', top='+top+', left='+left);
         return false;
     }
-	
+
 
 </script>
 
@@ -191,10 +191,10 @@ var top = (screen.height/2)-(h/2);
 	     //alert("Pardeep")
 var left = (screen.width/2)-(w/2);
 var top = (screen.height/2)-(h/2);
-      var targetWin =  window.open('http://localhost/DBMS_Proj/popuppenalty.php?borrowid=' + borrowid, 'name', 'location=no,menubar=no,wiscrollbars=no,resizable=no,fullscreen=no,width='+w+', height='+h+', top='+top+', left='+left);
+      var targetWin =  window.open('./popuppenalty.php?borrowid=' + borrowid, 'name', 'location=no,menubar=no,wiscrollbars=no,resizable=no,fullscreen=no,width='+w+', height='+h+', top='+top+', left='+left);
         return false;
     }
-	
+
 
 </script>
 <br/>
@@ -230,20 +230,20 @@ var top = (screen.height/2)-(h/2);
 </tr>
 </table>
 
-<?php 
+<?php
 include('config.php');
 $studentid=$_GET['studentid'];
-$q1 ="select * from tblborrow where studentid='$studentid' and status='Signed'";
+$q1 ="select * from book_loans where card_no='$studentid' and date_in = '0000-00-00'";
 
 $ret=mysql_query($q1);
 $re=mysql_num_rows($ret);
 
-$q2 ="select * from tblborrow where studentid='$studentid' and status='Unsigned'";
+$q2 ="select * from book_loans where card_no='$studentid' and date_in <> '0000-00-00'";
 
 $un=mysql_query($q2);
 $unre=mysql_num_rows($un);
 
-$q3 ="select * from tblborrow where studentid='$studentid'";
+$q3 ="select * from book_loans where card_no='$studentid'";
 
 $all=mysql_query($q3);
 $allb=mysql_num_rows($all);
@@ -284,18 +284,18 @@ $click=$_POST['click'];
 
 if(isset($_GET['studentid'])){
 	$studentid=$_GET['studentid'];
-	
+
 if(!$click){
-	
-	$query1 = "select * from tblborrow where studentid=$studentid";
+
+	$query1 = "select * from book_loans where card_no=$studentid";
 }
 elseif($click=="View All" && $click=="View All"){
 
-	$query1 = "select * from tblborrow where studentid=$studentid";
+	$query1 = "select * from book_loans where card_no=$studentid";
 }
 else{
-$query1 = "select * from tblborrow where studentid=$studentid and status='".$click."'";
-} 
+$query1 = "select * from book_loans where card_no=$studentid ";
+}
 
 $get=mysql_query($query1);
 $num=mysql_num_rows($get);
@@ -308,15 +308,18 @@ if($num==0){ ?>
 <?php }
 while($borrower=mysql_fetch_array($get)){
 
-
+  $borrower["status"] = "Signed";
+  if($borrower['date_in'] == "0000-00-00") {
+    $borrower["status"] = "Unsigned";
+  }
 ?>
 
 
 <?php
 
 
-switch($borrower['status']){
-	
+switch($borrower['date_in']){
+
 	case "Signed":
 	   $dep="Selected";
 	   break;
@@ -330,12 +333,12 @@ if($borrower['status']=="Signed"){}else
 
 
 	$id=$borrower['borrowid'];
-			//$myhref="<a href='' style='margin-right:10px;' id='$id' 
+			//$myhref="<a href='' style='margin-right:10px;' id='$id'
    // onclick='OpenPopUp(id,'','',300,200);' class='trnone'>";
  }
- 
+
 ?>
- 
+
   <tr id="content" bordercolor="#FF6666" height="30"
 
 <?php if($borrower['status']=='Unsigned'){
@@ -345,66 +348,66 @@ if($borrower['status']=="Signed"){}else
  class="trme" <?php if($borrower['status']=='Unsigned'){
 	  echo 'bgcolor=""';
 	  }else {echo 'bgcolor=""';} ?>>
-  
-    <td bgcolor="white" align="center" 
+
+    <td bgcolor="white" align="center"
 
  >
-  <?php if($borrower['status']=='Unsigned'){ ?> 
+  <?php if($borrower['status']=='Unsigned'){ ?>
 	<div style="height:20px; width:20px; border:1px black solid; background-color:#FF6666;"></div>
 	 <?php }else { ?>
 <div style="height:20px; width:20px;border:1px black solid; background-color:#E8EDFF;"></div>
 <?php } ?>
 
 </td>
-      
+
     <td >
-     
+
    <?php if($borrower['status']=="Signed"){}else{ ?>
-    <a href="" style="margin-right:10px;" id="<?php echo $borrower['borrowid']; ?>" 
+    <a href="" style="margin-right:10px;" id="<?php echo $borrower['loan_id']; ?>"
     onclick="OpenPopUp(id,'','',800,500);" class='trnone'> <?php } ?>
 
-    
+
      <div class="trdiv"><?php echo date_format(date_create($borrower['dateborrow']), 'M d Y     h:i A'); ?></div> </a></td >
     <td>
     <?php if($borrower['status']=="Signed"){}else{ ?>
-    <a href="" style="margin-right:10px;" id="<?php echo $borrower['borrowid']; ?>" 
+    <a href="" style="margin-right:10px;" id="<?php echo $borrower['loan_id']; ?>"
     onclick="OpenPopUp(id,'','',800,500);" class='trnone'> <?php } ?> <div class="trdiv">
-	
+
 	<?php
-	$qu = "select * from books where accNo='".$borrower['accNo']."'";
+	$qu = "select * from book where book_id='".$borrower['book_id']."'";
     $gets=mysql_query($qu);
 	$borrow=mysql_fetch_array($gets) or die(mysql_error());
 	$del=mysql_num_rows($gets);
-	
-	 echo $borrow['booktitle'];
+
+	 echo $borrow['title'];
 
 	 ?>
  </div></a>
- 
+
  </td>
     <td> <?php if($borrower['status']=="Signed"){}else{ ?>
-    <a href="" style="margin-right:10px;" id="<?php echo $borrower['borrowid']; ?>" 
+    <a href="" style="margin-right:10px;" id="<?php echo $borrower['borrowid']; ?>"
     onclick="OpenPopUp(id,'','',700,400);" class='trnone'> <?php } ?><div class="trdiv">
 	<?php echo date_format(date_create($borrower['duedate']), 'F j, Y '); ?>
 	</div></a></td>
     <td> <div class="trdiv">
 
     <?php if($borrower['datereturn']=="0000-00-00"){ ?>
-    
+
     <?php  if($_GET['id']==$borrower['borrowid']){ ?>
 
 //echo date('Y-m-d');
- 
-  
 
-<?php 
+
+
+<?php
 
 for($i=01;$i<32;$i++){ ?>
 
-<option <?php 
+<option <?php
 if(date('d')==$i){ echo 'selected="selected"'; ?>
 <?php }else{}
- ?> 
+ ?>
 value="<?php  echo $i;?>" <?php echo $i; ?>><?php echo $i; ?></option>
 
 <?php } ?>
@@ -413,11 +416,11 @@ value="<?php  echo $i;?>" <?php echo $i; ?>><?php echo $i; ?></option>
 <select name="byear">
 <option>YYYY</option>
 <?php for($i=1000;$i<2021;$i++){ ?>
-<option 
-<?php 
+<option
+<?php
 if(date('Y')==$i){ echo 'selected="selected"'; ?>
 <?php }else{}
- ?> 
+ ?>
  value="<?php  echo $i;?>" ><?php echo $i; ?></option>
 <?php }?>
 </select>
@@ -426,45 +429,45 @@ if(date('Y')==$i){ echo 'selected="selected"'; ?>
 
     <?php }else{ ?>
      <?php if($borrower['status']=="Signed"){}else{ ?>
-     
-    <a href="" style="margin-right:10px;" id="<?php echo $borrower['borrowid']; ?>" 
+
+    <a href="" style="margin-right:10px;" id="<?php echo $borrower['borrowid']; ?>"
     onclick="OpenPopUp(id,'','',700,400);" class='trnone'> <?php } ?>
-    
+
     <div class="trdiv">
 		Unreturn
-	</div>	
+	</div>
 	<?php	}	 ?>
-    
+
     </div>
     </a></td>
     <?php }else{ echo date_format(date_create($borrower['datereturn']), 'F j, Y'); } ?>
-    
-    <td><?php  if($_GET['id']==$borrower['borrowid']){?> 
+
+    <td><?php  if($_GET['id']==$borrower['borrowid']){?>
      <div class="trdiv">
      <?php if($borrower['status']=="Unsigned"){ ?>
     <select name="sig" >
     <option></option>
     <option value="Signed">Signed</option>
     </select>
-	
+
 	<?php }?>
     <?php }else{
 	if($borrower['status']=="Unsigned"){ ?>
    <div class="trdiv">
-    <a href="" style="margin-right:10px;" id="<?php echo $borrower['borrowid']; ?>" 
+    <a href="" style="margin-right:10px;" id="<?php echo $borrower['borrowid']; ?>"
     onclick="OpenPopUp(id,'','',700,400);" class='trnone'>
    Unsigned </a>
-	<?php }else{ 
+	<?php }else{
 	echo "<img src='images/tick.gif' height='15'/>".$borrower['status'];
-	 } 
+	 }
 	}?></div></a>
     </td>
-    
+
 <?php if($borrower['status']=="Unsigned"){}else{ ?>
     <td width="30"><a href="" id="<?php echo $borrower['borrowid']; ?>" class="ass"><img src="icons/b_drop.png"/></td>
   <?php } ?>
 
-    
+
 <td>
 
 
@@ -488,7 +491,7 @@ if(date('Y')==$i){ echo 'selected="selected"'; ?>
 
 
 
-<?php 
+<?php
 if(isset($_GET['id'])){
 $query1 = "select * from tblborrow where borrowid=$_GET[id]";
 $get=mysql_query($query1);
@@ -500,7 +503,7 @@ $boks=mysql_fetch_array($s);
 $add=$boks['bookcopies']+1;
 }
 ?>
-<?php 
+<?php
 
 if(isset($_POST['return'])){
 	include('config.php');
@@ -511,7 +514,7 @@ if(isset($_POST['return'])){
   $bday = $_POST['bday'];
   $byear = $_POST['byear'];
   $dateret = $byear.'-'.$bmonth.'-'.$bday;
-  
+
 	if(empty($sig)){
 		echo "<script>alert('Please dont forget to sign');</script>";
 		}
@@ -521,12 +524,12 @@ else{
 		if($objExec){
 			$up="update books set bookcopies='$add' where bookid='".$boks['bookid']."'";
 		mysql_query($up)or die(mysql_error());
-		
+
 		echo "<script>alert('The Book has been return successfully');</script>";
 
 	echo "<script>window.location='?returnBooks&studentid=$_GET[studentid]'</script>";
 			}
-			
+
 	}} ?>
 
 
@@ -557,7 +560,7 @@ var info = 'borrowid=' + del_id;
    url: "delete.php",
    data: info,
    success: function(){
-   
+
    }
  });
          $(this).parents(".trme").animate({ backgroundColor: "#fbc7c7" }, "fast")

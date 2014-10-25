@@ -13,12 +13,12 @@ color:#000;}
 .dewey{
 	font-size:20px;
 	font-family:Arial, Helvetica, sans-serif;
-	
+
 	font-weight:bold;}
 	hr{
 		background:#999;
 		color:#CCC;}
-		
+
 
 </style>
 <table width="412" border="0" cellspacing="1" style=" background:#060;font-size:12px; font-family:Verdana, Geneva, sans-serif;">
@@ -30,7 +30,7 @@ if(isset($_POST))
 
 $q=$_POST['searchword'];
 
-$sql_res="select * from tblborrower where  lname like '$q%' or fname like '$q%' limit 8";
+$sql_res="select * from borrower where  lname like '$q%' or fname like '$q%' limit 8";
 }
 
 $r=mysql_query($sql_res);
@@ -39,10 +39,10 @@ $items = 0;
 
 <?php while($row=mysql_fetch_array($r))
 {
-	$j="<a href='index.php?returnBooks&studentid=$row[studentid]' class='a'>";
+	$j="<a href='index.php?returnBooks&studentid=$row[card_no]' class='a'>";
 	//$d="<a href='?del&idnumber=$row[idnumber]' class='a'>";
-	
-		 $items++; 
+
+		 $items++;
 
 $fname=$row['fname'];
 $lname=$row['lname'];

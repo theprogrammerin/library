@@ -45,7 +45,7 @@ $(document).ready(function(){
 <script>
 $(document).ready(function(){
   $("#close").click(function(){
-    
+
   });
 
 
@@ -53,7 +53,7 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
-function refreshParent() 
+function refreshParent()
 {
     window.opener.location.reload(true);
 }
@@ -65,25 +65,25 @@ function refreshParent()
 <?php
 include('config.php');
 if(isset($_GET['borrowid'])){
-	
-	$q=mysql_query("select * from tblborrow where borrowid='".$_GET['borrowid']."'");
-	
+
+	$q=mysql_query("select * from book_loans where loan_id='".$_GET['borrowid']."'");
+
 	$name=mysql_fetch_array($q)or die(mysql_error());
-	
-	$qs=mysql_query("select * from tblborrower where studentid='".$name['studentid']."'");
-	
+
+	$qs=mysql_query("select * from borrower where card_no='".$name['card_no']."'");
+
 	$print=mysql_fetch_array($qs)or die(mysql_error());
-	$qsa=mysql_query("select * from books where accNo='".$name['accNo']."'");
-	
+	$qsa=mysql_query("select * from book where book_id='".$name['book_id']."'");
+
 	$book=mysql_fetch_array($qsa)or die(mysql_error());
-	
+
 
 	}
-	
+
  ?>
   <script>
         function printDiv(divID) {
-			
+
             //Get the HTML of div
             var divElements = document.getElementById(divID).innerHTML;
 			 window.location='?borrowid=<?php echo  $_GET['borrowid']; ?>&print/save';
@@ -91,17 +91,17 @@ if(isset($_GET['borrowid'])){
             var oldPage = document.body.innerHTML;
 
             //Reset the page's HTML with div's HTML only
-            document.body.innerHTML = 
-              "<nav>" + 
+            document.body.innerHTML =
+              "<nav>" +
               divElements + "</nav>";
-                
+
             //Print Page
             window.print();
-			
-        
+
+
 
             //Restore orignal HTML
-            document.body.innerHTML = oldPage; 
+            document.body.innerHTML = oldPage;
 			if(window.print){
 			 window.location='?borrowid=<?php echo  $_GET['borrowid']; ?>&accNo=<?php echo  $_GET['accNo']; ?>&print/save';
 			 }
@@ -129,7 +129,7 @@ onclick="javascript:printDiv('print')">
 
 </a>
 <a href="?borrowid=<?php echo $name['borrowid']; ?>&save" title="SAVE">
-<?php  
+<?php
 
   ?>
 <div style=" margin-right:7px; height:25px;width:50px;text-align:center;  border:1px solid #CCC; -moz-border-radius:5px; margin-top:9px; color:#030; font-size:12px; font-family:Verdana, Geneva, sans-serif; float:right;">
@@ -143,7 +143,7 @@ onclick="javascript:printDiv('print')">
 <input type="hidden" name="tot" value="<?php echo $_POST['total']; ?>">
 
 
-<input type="hidden" name="date1" value="<?php 
+<input type="hidden" name="date1" value="<?php
 echo date_format(date_create($_POST['datereturn']), 'Y/m/d'); ?>">
 <input type="submit" value="Save" name="save1" style="width:50px;">
 </form>
@@ -170,7 +170,7 @@ echo date_format(date_create($_POST['datereturn']), 'Y/m/d'); ?>">
 </tr>
 <tr>
 <td style="font-size:11px; color:#3B5998;">Year/level Section:</td>
-<td style="font-size:11px;"><?php 
+<td style="font-size:11px;"><?php
 
 if($print['levelyr']==1){
 	echo "1st Year";
@@ -218,7 +218,7 @@ if($print['levelyr']==1){
 <td colspan="3" style="border-top:1px #3B5998 solid;"></td>
 </tr>
 <tr>
-<td style="font-size:11px;" width="180"><?php echo $book['booktitle']; ?></td>
+<td style="font-size:11px;" width="180"><?php echo $book['title']; ?></td>
 <td style="font-size:11px;" align="right"><?php echo $name['amount']; ?></td>
 <td style="font-size:11px;" align="right"><?php echo $name['amount']; ?></td>
 </tr>
@@ -307,7 +307,7 @@ if($print['levelyr']==1){
 <table border="0" style="margin-top:10px; margin-left:10px;">
 <tr><td>
 Date Borrowed:</td><td><input type="text" readonly="readonly" value="
-<?php //echo $name['dateborrow']; 
+<?php //echo $name['dateborrow'];
 
 echo date_format(date_create($name['dateborrow']), 'F j, Y');
 ?>
@@ -315,16 +315,16 @@ echo date_format(date_create($name['dateborrow']), 'F j, Y');
 </tr></tr>
 <tr><td>
 <?php
-include('config.php');	
-	$q=mysql_query("select * from books where accNo='".$name['accNo']."'");
+include('config.php');
+	$q=mysql_query("select * from book where book_id='".$name['book_id']."'");
 	$book=mysql_fetch_array($q)or die(mysql_error());
-	
+
 //echo date_format(date_create($name['dateborrow']), 'd');
  ?>
-Book Title:</td><td><textarea style="padding:6px; width:330px;" value="" readonly="readonly"><?php echo $book['booktitle']; ?></textarea>
+Book Title:</td><td><textarea style="padding:6px; width:330px;" value="" readonly="readonly"><?php echo $book['title']; ?></textarea>
 </td></tr>
 <tr><td>
-Date Due:</td><td><input style="padding:4px; width:226px;" readonly="readonly" name="datedue" type="text" 
+Date Due:</td><td><input style="padding:4px; width:226px;" readonly="readonly" name="datedue" type="text"
 value="<?php echo date_format(date_create($name['duedate']), 'F j, Y'); ?>
 ">
 </td></tr>
@@ -335,46 +335,46 @@ value="<?php echo date_format(date_create($name['duedate']), 'F j, Y'); ?>
 switch (date_format(date_create($name['dateborrow']), 'm')) {
 	  case '01':
 	    $bmonth1 = "selected"; break;
-	  case '02':	
+	  case '02':
 	    $bmonth2 = "selected"; break;
-	  case '03':	
+	  case '03':
 	    $bmonth3 = "selected"; break;
-	  case '04':	
+	  case '04':
 	    $bmonth4 = "selected"; break;
-	  case '05':	
+	  case '05':
 	    $bmonth5 = "selected"; break;
-	  case '06':	
+	  case '06':
 	    $bmonth6 = "selected"; break;
-	  case '07':	
+	  case '07':
             $bmonth7 = "selected"; break;
-	  case '08':	
+	  case '08':
 	    $bmonth8 = "selected"; break;
-	  case '09':	
+	  case '09':
 	    $bmonth9 = "selected"; break;
-	  case '10':	
+	  case '10':
 	    $bmonth10 = "selected"; break;
-	  case '11':	
+	  case '11':
 	    $bmonth11 = "selected"; break;
-	  case '12':	
+	  case '12':
 	    $bmonth12 = "selected"; break;
 	}
  ?>
-Date Return:</td><td> 
+Date Return:</td><td>
 
 <input type="text" style="padding:4px; width:226px;" readonly="readonly" value="<?php echo date_format(date_create(date("m/d/y")), 'F j, Y'); ?>">
 <?php
-	///  $myCalendar = new tc_calendar("date5", true, false);
-	//  $myCalendar->setIcon("calendar/images/iconCalendar.gif");
-	//  $myCalendar->setDate(date('d'), date('m'), date('Y'));
-	//  $myCalendar->setPath("calendar/");
-	//  $myCalendar->setYearInterval(2000, 2020);
-	//  $myCalendar->dateAllow('2008-05-13', '2020-03-01');
-	//  $myCalendar->setDateFormat('F j, Y');
-	//  $myCalendar->setAlignment('left', 'bottom');
-	  //$myCalendar->setSpecificDate(array("2011-04-01", "2011-04-04", "2011-12-25"), 0, 'year');
-	 // $myCalendar->setSpecificDate(array("2011-04-10", "2011-04-14"), 0, 'month');
-	 // $myCalendar->setSpecificDate(array("2011-06-01"), 0, '');
-	 // $myCalendar->writeScript();
+	 $myCalendar = new tc_calendar("date5", true, false);
+	 $myCalendar->setIcon("calendar/images/iconCalendar.gif");
+	 $myCalendar->setDate(date('d'), date('m'), date('Y'));
+	 $myCalendar->setPath("calendar/");
+	 $myCalendar->setYearInterval(2000, 2020);
+	 $myCalendar->dateAllow('2008-05-13', '2020-03-01');
+	 $myCalendar->setDateFormat('F j, Y');
+	 $myCalendar->setAlignment('left', 'bottom');
+	  $myCalendar->setSpecificDate(array("2011-04-01", "2011-04-04", "2011-12-25"), 0, 'year');
+	 $myCalendar->setSpecificDate(array("2011-04-10", "2011-04-14"), 0, 'month');
+	 $myCalendar->setSpecificDate(array("2011-06-01"), 0, '');
+	 $myCalendar->writeScript();
 	  ?>
 </td></tr>
 <tr><td>Signature</td><td>
@@ -386,22 +386,22 @@ Date Return:</td><td>
 <input type="submit" style="padding:4px; width:100px;" name="return" value="Submit">
 </td>
 <td>
-<?php 
+<?php
 
 /*$query1 = "select * from tblborrow where borrowid=$_GET[borrowid]";
 $get=mysql_query($query1);
 $bookid=mysql_fetch_array($get);*/
 
-$query12 = "select * from books where accNo=$name[accNo]";
+$query12 = "select * from book where book_id=$name[book_id]";
 $s=mysql_query($query12);
 $boks=mysql_fetch_array($s);
 $add=$boks['bookcopies']+1;
 ?>
-<?php 
+<?php
 
 
 $id=$_GET['borrowid'];
-	//$datedue=$name['duedate']; 
+	//$datedue=$name['duedate'];
 	$datedue=date_format(date_create($name['duedate']), 'm j, Y');
 	$sig=$_POST['sig'];
 	$bookid=$_POST['bookid'];
@@ -409,55 +409,55 @@ $id=$_GET['borrowid'];
   $borrowed=date_format(date_create($name['dateborrow']), 'm j, Y');
   $theDate  = isset($_REQUEST["date5"]) ? $_REQUEST["date5"] : "";
   $format=date_format(date_create(date("m/d/y")), 'm j, Y');
- 
- 
+
+
 if(isset($_POST['return'])){
-	
-	
+
+
 
   if($borrowed > $format){ ?>
 			<div style="font-family:Verdana, Geneva, sans-serif; font-size:12px; color:#F00;">Invalid Date</div>
 		<?php	}
-elseif($format > $datedue){ 
+elseif($format > $datedue){
 
-?>    
+?>
 			<script>
 $(document).ready(function(){
     $("#div1").fadeIn(1000);
 });
 </script>
 		<?php }
-	
-		
-		
+
+
+
 else{
 	include('config.php');
-	$update="update tblborrow set datereturn='$theDate',status='$sig' where borrowid='$id'";
+	$update="update book_loans set date_in='$theDate' where loan_id='$id'";
 		$objExec = mysql_query($update)or die(mysql_error());
 		if($objExec){
-		$up="update books set bookcopies='$add' where accNo='".$boks['accNo']."'";
-	mysql_query($up)or die(mysql_error()); ?>
-		
+		// $up="update book set bookcopies='$add' where accNo='".$boks['accNo']."'";
+	// mysql_query($up)or die(mysql_error()); ?>
+
 		<script>
 $(document).ready(function(){
     $("#div2").fadeIn(1000);
 });
 </script>
 
-	<?php	
+	<?php
 			}
-			
+
 	}} ?>
 </td>
 </tr>
 </table>
 </form>
-<?php 
+<?php
 if(isset($_POST['save1'])){
 	include('config.php');
-	 
+
 	$re=$_POST['date1'];
-	
+
 	$bor=$_POST['bor_id'];
 	$dat=$_POST['datedew'];
 	$dater=$_POST['dateret'];
@@ -465,7 +465,7 @@ if(isset($_POST['save1'])){
 	$tot=$_POST['tot'];
         $accNo=$_POST['accNo'];
  $bid=$_POST['bid'];
-	
+
 $sql="insert into tblreciept (studentid,accNo,borrowid,datedue,datereturn,totaldays,totalpay) values(
 	'".$bor."',
         '".$accNo."',
@@ -475,10 +475,10 @@ $sql="insert into tblreciept (studentid,accNo,borrowid,datedue,datereturn,totald
 	'".$tota."',
 	'".$tot."'
 	)";
-			
+
 	$pay=mysql_query($sql) or die (mysql_error());
 if($pay){
-	
+
 	$update2="update tblborrow set datereturn='$re',item='0', status='Signed' where borrowid='$id'";
 	$objExec2 = mysql_query($update2)or die(mysql_error());
 if($objExec2){
@@ -489,12 +489,12 @@ $(document).ready(function(){
     $("#div2").fadeIn(1000);
 });
 </script>
-	<?php	
+	<?php
 	}
 }
 }
 ?>
-    
+
 </div>
 </div>
 </body>
