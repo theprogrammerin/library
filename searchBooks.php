@@ -7,11 +7,11 @@
 	margin-left:25px;
 	overflow:scroll;
 	overflow-x:hidden;
-    overflow-y:scroll;	
+    overflow-y:scroll;
 	}
 .searcharea{
 	float:left;
-	
+
 	margin-left:20px;
 	}
 .hed{
@@ -25,7 +25,7 @@
 
 $(document).ready(function(){
 
-$(".search").keyup(function() 
+$(".search").keyup(function()
 {
 var searchbox = $(this).val();
 var dataString = 'searchword='+ searchbox;
@@ -59,7 +59,7 @@ $("#display").html(html).show();
 	}});
 
 
-}return false;    
+}return false;
 
 
 });
@@ -68,7 +68,7 @@ $("#display").html(html).show();
 jQuery(function($){
    $("#searchbox").Watermark("Search Books through Book ID, Title, Authors");
    });
-   
+
    </script>
 
 <br/>
@@ -85,7 +85,7 @@ jQuery(function($){
 <style>
 .bookstat{ font-size:12px; font-family:Verdana, Geneva, sans-serif; text-align:right; margin-left:0px; width:732px; margin-top:20px; float:left;}
 .web{ -webkit-border-radius:7px 7px 0px 0px;
- -moz-border-radius:7px 7px 0px 0px; 
+ -moz-border-radius:7px 7px 0px 0px;
  text-align:center; font-size:12px; font-weight:bold; font-family:Arial, "Arial Black", "Arial Narrow"; color:#003399;
 }
 .unret{border:1px #CCC solid;}
@@ -122,11 +122,11 @@ jQuery(function($){
 </div></div>
 <div class="footer">
 <div class="leftfoot"></div>
-<div class="bodyfoot">   
+<div class="bodyfoot">
 <div class="bookstat">
-   <?php 
+   <?php
    include('config.php');
-   
+
    $q="SELECT count(*) from book";
 
 
@@ -134,23 +134,23 @@ $rs=mysql_query($q);
 $row=mysql_fetch_array($rs);
 $booktotal=$row['count(*)'];
 echo "&nbsp;";
-	 $qss="SELECT * FROM tblborrow where status='Unsigned'";
+	 $qss="SELECT * FROM book_loans where date_in = '0000-00-00'";
 	 $rss=mysql_query($qss);
 $rows=mysql_num_rows($rss);
 //
 
-   ?> 
+   ?>
 
    <table width="" border="0" style=" height:30px;border:1px inset #999; float:left;">
   <tr>
     <td>Total variety of Books : </td>
     <td><input readonly="readonly" type="text" style="background:#FFF;padding:2px; width:50px;" value="<?php echo $booktotal;
  ?>"/></td>
-  
+
   </tr>
 </table>
 
-  
+
 <a href="?addBooks" >
 <table class="addbooks" border="0">
 <tr width="150">
@@ -161,7 +161,7 @@ $rows=mysql_num_rows($rss);
 </table>
 </a>
 
-  <a href="" style="margin-right:10px;" 
+  <a href="" style="margin-right:10px;"
     onclick="OpenPopUp(id,'','',770,500);" class='trnone'>
 <table class="list" border="0" style="float:left;">
 <tr width="150">
@@ -172,7 +172,7 @@ $rows=mysql_num_rows($rss);
 </table>
 </a>
    </div>
-   
+
    </div>
 <div class="rightfoot"></div>
 </div>

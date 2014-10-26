@@ -14,18 +14,18 @@ if(isset($_POST))
 
 $q=$_POST['searchword'];
 
-$sql_res="select b.book_id, title, author_name from book b JOIN book_authors ba ON b.book_id = ba.book_id where 
+$sql_res="select b.book_id, title, author_name from book b JOIN book_authors ba ON b.book_id = ba.book_id where
 b.book_id like '%$q%' or title like '%$q%' or author_name like '%$q%' ";
 
 $r=mysql_query($sql_res);
 $items = 0;
 ?>
 
-	
-<?php while($row=mysql_fetch_array($r))
-{ 
 
-	 $items++; 
+<?php while($row=mysql_fetch_array($r))
+{
+
+	 $items++;
 $bookid=$row['book_id'];
 $booktitle=$row['title'];
 $author=$row['author_name'];
@@ -48,7 +48,7 @@ $fauthor = str_ireplace($q, $rauthor, $author);
 <?php echo $fbooktitle; ?>
 </td>
 
- 
+
 <td width="200"> <?php echo $fauthor; ?></td>
 
 <?php
@@ -65,7 +65,7 @@ if($items==0){ ?>
 Search Not Found</div>
 
 <?php	}
- 
+
 }
 
 ?><br/>

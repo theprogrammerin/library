@@ -53,7 +53,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 
-$(".search").keyup(function() 
+$(".search").keyup(function()
 {
 var searchbox = $(this).val();
 var dataString = 'searchword='+ searchbox;
@@ -72,7 +72,7 @@ success: function(h)
 $("#display").html(h).hide();
 	}});
 
-  
+
 }
 else
 {
@@ -89,7 +89,7 @@ $("#display").html(html).show();
 	}});
 
 
-}return false;    
+}return false;
 
 
 });
@@ -98,9 +98,9 @@ $("#display").html(html).show();
 jQuery(function($){
    $("#searchbox").Watermark("Search StudentID, Name");
    });
-   
-  
-   
+
+
+
    </script>
     <script language="javascript" type="text/javascript">
 function timing()
@@ -153,7 +153,7 @@ setTimeout("timing()",1000);
 <div style=" margin-left:7px; margin-top:13px; color:#030; font-size:15px; font-family:Verdana, Geneva, sans-serif; font-weight:bold;float:left">Error</div>
 </div>
 
-<div style="font-size:15px; padding-top:40px; margin-left:20px; margin-right:20px; font-family:Arial, Helvetica, sans-serif; text-align:center">Tulo sa ang limit karun
+<div style="font-size:15px; padding-top:40px; margin-left:20px; margin-right:20px; font-family:Arial, Helvetica, sans-serif; text-align:center">You cannot issue more books.
 </div>
 
 <div class="btnbox" id="closeerror">
@@ -199,7 +199,7 @@ setTimeout("timing()",1000);
 .dewey{
 	font-size:20px;
 	font-family:Arial, Helvetica, sans-serif;
-	
+
 	font-weight:bold;}
 	hr{
 		background:#999;
@@ -253,7 +253,7 @@ $rs=mysql_query($sql);
 $get=mysql_fetch_array($rs);
 
 	} ?>
-    
+
 <table width="420" border="0" style="font-size:12px; font-family:Arial, 'Arial Black', 'Arial Narrow'; font-weight:bold;border:1px inset #999; margin-top:5px; margin-left:20px; float:left;">
 </tr>
 <tr><td>Name</td><td>Card No.</td>
@@ -267,47 +267,12 @@ $get=mysql_fetch_array($rs);
 </tr>
 </table>
 <table border="0" wi style="font-size:12px; font-family:Arial, 'Arial Black', 'Arial Narrow'; font-weight:bold; border:inset #999 1px;width: 420px;  margin-top:10px; margin-bottom:20px; float:left; margin-left:20px;">
-<tr><td colspan="3">Book ID</td></tr>
+<tr><td colspan="3">Search Book</td></tr>
 <tr>
 <td colspan="3">
-<select 
-<?php if(isset($_GET['card_no'])) {?>
-<?php }else{ ?> disabled="disabled"<?php }  ?> name="classID" style=" padding:4px;" class="com" onChange="display(this.value)">
-<option ></option>
-<?php if(isset($_GET['book_id'])){
-	$res=mysql_query("select b.book_id, title, author_name from book b JOIN book_authors ba ON b.book_id = ba.book_id where b.book_id=$_GET[book_id]");
-	$r=mysql_fetch_array($res);
-	
-	} ?>
-    
-<?php
-
-include('config.php');
-$sql="SELECT * FROM bookclass";
-$rs=mysql_query($sql);
-$class=0;
-
-while($row=mysql_fetch_array($rs)){
-	$class++;
- ?>
-<option 
-<?php 
-if($r['bookclass']==$row['classid']){
-	echo 'selected="selected"';
-	}else{}
-?>
- value="<?php
-  echo $row['classid'];?>">
-<?php 
-
-echo $row['classid']."&nbsp;".$row['classname']; 
-
-?>
-</option>
-<?php
-}
-?>
-</select>
+<input
+<?php if(isset($_GET['card_no'])) { ?>
+<?php }else{ ?> disabled="disabled"<?php }  ?> name="classID" style=" padding:4px;" class="com" onChange="display(this.value)" />
 
 </td>
 </tr>
@@ -356,8 +321,8 @@ if(year < 1000){
 year += 1900
 }
 
-var monthArray = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")	
-			   
+var monthArray = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
+
 var dayArray = new Array("Sunday","Monday","Tuesday","Wednesday", "Thursday","Friday","Saturday")
 
 document.write( dayArray[day] + ", " + monthArray[month] + " " + date + ", " + year )
@@ -422,15 +387,10 @@ var top = (screen.height/2)-(h/2);
       var targetWin =  window.open('http://localhost/lib/default.php' + borrowid, 'name', 'location=no,menubar=no,wiscrollbars=no,resizable=no,fullscreen=no,width='+w+', height='+h+', top='+top+', left='+left);
         return false;
     }
-	
+
 
 </script>
 <script type="text/javascript">
-var auto_refresh = setInterval(
-function ()
-{
-$('#ass').load('loadpay.php').fadeIn("slow");
-}, 1000); // refresh every 10000 milliseconds
 
 </script>
 <span id="ass"></span>
@@ -438,7 +398,7 @@ $('#ass').load('loadpay.php').fadeIn("slow");
 </td>
 <td class="value" align="center" style="width:25px;">
  <div id="id" title="Change default value">
-  <a href="" style="margin-right:10px;" id="" 
+  <a href="" style="margin-right:10px;" id=""
     onclick="OpenPopUp(id,'','',300,100);" class='trnone'>
 
 <img src="icons/b_edit.png"  />
@@ -463,22 +423,23 @@ $('#ass').load('loadpay.php').fadeIn("slow");
   $bday = $_POST['bday'];
   $byear = $_POST['byear'];
   $duedate = $byear.'-'.$bmonth.'-'.$bday.'-'.date('H:i:s');
-  
-  
+
+
 	$classid=$_POST['classID'];
-	$accNo=$_POST['bookid'];
+  $accNo= explode("-", $_POST['bookid'])[0];
+	$branch_id = explode("-", $_POST['bookid'])[1];
 	$studentid=$_POST['studentid'];
 	$dateborrow=$_POST['dateborrow'];
 	$date=$_POST['ed'];
 	$copy=$_POST['copy'];
 	$theDate  = isset($_REQUEST["date5"]) ? $_REQUEST["date5"] : "";
     $mydate= $theDate.'-'.date("H:i:s");
-	
+
 	$copies=$_POST['copies'];
 	if(isset($_POST['borrow']))
 {
 	include('config.php');
-	$strSQL = "SELECT * FROM tblborrow WHERE studentid = '$studentid' and status='Unsigned' ";
+	$strSQL = "SELECT * FROM book_loans WHERE card_no = '$studentid' and date_in = '0000-00-00' ";
 $objExec = mysql_query($strSQL);
 $count=0;
 while($row=mysql_fetch_array($objExec)){
@@ -492,7 +453,7 @@ $(document).ready(function(){
 });
 </script>
 
-<?php	//echo "<div class='error'>tulo ra limit bai</div>";
+<?php	echo "<div class='error'>You cannot issue more books.</div>";
 	}
 	elseif(empty($classid)){?>
     <script>
@@ -509,54 +470,45 @@ $(document).ready(function(){
 </script>
 	 <?php }
 else{
-	$strSQL = "SELECT * FROM tblborrow  WHERE accNo = '$accNo' and studentid = '$studentid' and status='Unsigned' ";
+	$strSQL = "SELECT * FROM book_loans  WHERE book_id = '$accNo' and card_no = '$studentid' and branch_id = $branch_id and date_in = '0000-00-00' ";
 $objExec = mysql_query($strSQL);
-$row=mysql_fetch_array($objExec);	
+$row=mysql_fetch_array($objExec);
 if($row){ ?>
 <script>
 $(document).ready(function(){
     $("#error2").fadeIn(1000);
 });
 </script>
-	<?php	//echo "<div class='error'>You can borrow only one type of books</div>";
+	<?php	echo "<div class='error'>You can borrow only one type of books</div>";
 	}
 else{
-	$sql="insert into tblborrow (accNo,classid,studentid,dateborrow,duedate,datereturn,status,amount,item) values(
+	$sql="insert into book_loans (book_id,branch_id,card_no,date_out,due_date,date_in) values(
 	'".$accNo."',
-	'".$classid."',
+  '".$branch_id."',
 	'".$studentid."',
 	'".date('Y-m-d H:i:s')."',
 	'".$mydate."',
-	'".$date."',
-	'Unsigned',
-	'".$_POST['pay']."',
-	'1'
-	
+	'0000-00-00'
 	)";
-			
 	$rs_update=mysql_query($sql);
 	if($rs_update){
 
 
-$upd="select * from books where accNo='".$_GET['accNo']."'";
+$upd="select * from book_copies where book_id='".$_GET['accNo']."'";
 		$obj = mysql_query($upd);
 $cop=mysql_fetch_array($obj);
 
 if(isset($_GET['accNo'])){
-		
-		$get=$cop['bookcopies']-1;
+
+		$get=$cop['no_of_copies']-1;
 }else{
 
 $get=$copy-1;
 }
-	
-$update="update books set bookcopies='$get' where accNo='$accNo'";
+
+$update="update book_copies set no_of_copies='$get' where book_id='$accNo'";
 		$objExec = mysql_query($update);
 if($objExec){
-	$up="update tblborrower set status='1' where studentid='$studentid'";
-		$obj = mysql_query($up);
-		$updateres="update tblbookreserve set status='0' where accNo='$accNo'";
-		$objExec = mysql_query($updateres);
 		 ?>
 
 		<script>
@@ -564,11 +516,11 @@ $(document).ready(function(){
     $("#success").fadeIn(1000);
 });
 </script>
-<?php	
+<?php
 	//echo "Your Borrow has been Registered";
 	}
-		
-		
+
+
 	}
 	}
 }
