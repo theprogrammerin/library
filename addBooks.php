@@ -96,16 +96,12 @@ $edit=mysql_fetch_array($get);
 <td colspan="0" align="left"><input type="text" name="booktitle" style="width:250px; padding:4px;" value="<?php echo $edit['title']; ?>"></td>
 </tr>
 <tr>
-<td >No. of authors </td><td>:</td>
-<td align="left"><input type="text" style="width:250px;padding:4px;" name="authortype" value="<?php echo $edit['type']; ?>"></td>
-
-<?php
-
-?>
 
 
 <td >Book Author(s)</td><td>:</td>
-<td align="left"><input type="text" style="width:250px;padding:4px;" name="author" value="<?php echo $edit['author_name']; ?>"></td>
+<td align="left" width="200px"><input type="text" style="width:250px;padding:4px;" name="author" value="<?php echo $edit['author_name']; ?>"></td>
+<td align="left">[if multiple, seperate with ","(comma)]</td>
+
 </tr>
 <tr>
   <td>
@@ -151,7 +147,6 @@ selected="selected"
 </td>
 <?php
 
-$branch_id="1";
 
 switch ($branch_name) {
   case "Oak Lawn":
@@ -173,7 +168,6 @@ switch ($branch_name) {
 }
 ?>
 <td ></td><td></td>
-<td align="left">[if multiple, seperate with ","(comma)]</td>
 
 </tr>
 
@@ -251,11 +245,11 @@ else{
 $insert1="Insert into book(book_id,title)
  values('$_POST[book_id]','$_POST[booktitle]')";
 
-$insert2="Insert into book_copies(book_id, branch_id, no_of_copies)
- values('$_POST[book_id]',".$branch_id.",'$_POST[copies]')";
 
-$insert3="Insert into book_authors(book_id, author_name, type)
+$insert2="Insert into book_authors(book_id, author_name, type)
  values('$_POST[book_id]','$_POST[author]','".$auth_type."')";
+$insert3="Insert into book_copies(book_id, branch_id, no_of_copies)
+ values('$_POST[book_id]',".$branch_id.",'$_POST[copies]')";
 
 
 
@@ -264,8 +258,7 @@ $rs2=mysql_query($insert2) or die(mysql_error());
 $rs3=mysql_query($insert3) or die(mysql_error());
 
 	if($rs1 && $rs2 && $rs3){ ?>
-
-				<script>
+<script>
 $(document).ready(function(){
     $("#success").fadeIn(1000);
 });
@@ -308,14 +301,6 @@ $(document).ready(function(){
   </tr>
 </table>
 </div>
-<div style="width:300px; float:left; margin-left:20px; margin-top:10px;">
-<table border="0">
-<tr>
-<td> </td>
-</tr>
-</table>
-</div>
-
 </form>
 
 
