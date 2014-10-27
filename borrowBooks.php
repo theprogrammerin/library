@@ -426,8 +426,11 @@ var top = (screen.height/2)-(h/2);
 
 
 	$classid=$_POST['classID'];
-  $accNo= explode("-", $_POST['bookid'])[0];
-	$branch_id = explode("-", $_POST['bookid'])[1];
+  if(!empty($_POST['bookid'])) {
+    $temp = explode("-", $_POST['bookid']);
+    $accNo= $temp[0];
+  	$branch_id = $temp[1];
+  }
 	$studentid=$_POST['studentid'];
 	$dateborrow=$_POST['dateborrow'];
 	$date=$_POST['ed'];
