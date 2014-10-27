@@ -90,7 +90,7 @@ include('overreport.php');
 
 <?php
 
-$duedate=mysql_query("select * FROM book_loans where due_date < NOW() order by due_date");
+$duedate=mysql_query("select * FROM book_loans where due_date < NOW() AND date_in = '0000-00-00' order by due_date");
 
 
 
