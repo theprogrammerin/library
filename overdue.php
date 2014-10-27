@@ -115,11 +115,11 @@ if($date1<$date2){
 
 $j= count+($c++);
 
-$start=date_format(date_create($row['duedate']), 'Y/m/d')."<br>";
+$start=date_format(date_create($row['due_date']), 'Y/m/d')."<br>";
 $today=date_format(date_create(date("Y/m/d")), 'Y/m/d')."<br>";
 
 $endTimeStamp = strtotime(date("Y/m/d"));
-$startTimeStamp = strtotime($row['duedate']);
+$startTimeStamp = strtotime($row['due_date']);
 $timeDiff = abs($endTimeStamp - $startTimeStamp);
 
 $numberDays = $timeDiff/86400;  // 86400 seconds in one day
@@ -133,7 +133,7 @@ $numberDays = intval($numberDays); ?>
 <td><?php echo $row['card_no']; ?></td>
 <td><?php echo $book['title']; ?></td>
 <td><?php echo $stud['fname']."&nbsp".$stud['lname']; ?></td>
-<td><?php echo date_format(date_create($row['duedate']), 'F d, Y'); ?></td>
+<td><?php echo date_format(date_create($row['due_date']), 'F d, Y'); ?></td>
 <td>
 <input type="hidden" name="countdays" value="<?php echo $numberDays; ?>">
 <?php echo $numberDays; ?></td>
