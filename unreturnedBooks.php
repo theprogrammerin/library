@@ -18,7 +18,7 @@
 
         });
 
- 
+
 
         // if all checkbox are selected, then check the select all checkbox
 
@@ -26,7 +26,7 @@
 
         $(".name").click(function () {
 
- 
+
 
             if ($(".name").length == $(".name:checked").length) {
 
@@ -38,7 +38,7 @@
 
             }
 
- 
+
 
         });
 
@@ -53,8 +53,8 @@
             var oldPage = document.body.innerHTML;
 
             //Reset the page's HTML with div's HTML only
-            document.body.innerHTML = 
-              "<nav>" + 
+            document.body.innerHTML =
+              "<nav>" +
               divElements + "</nav>";
 
             //Print Page
@@ -76,7 +76,7 @@
 });
 </script>
 
-    
+
 
 <div id="divempty" style=" z-index:20; position:absolute; background:url(images/trans_bg.png); width:100%;height:100%;display:none;">
 <div class="boxaction" style="margin-top:-20px;">
@@ -97,7 +97,7 @@
 
 <style>
 .trsss:nth-child(2n+1){
-	
+
 	background-color:#CCC;}
 .trsss:hover{background-color:#D5DEFF;
 
@@ -105,7 +105,7 @@
 <div class="hed" id="printablediv">
 
 <?php
- if(isset($_POST['print'])){  
+ if(isset($_POST['print'])){
  if(!$_POST['checkbox']){ ?>
 	 <script>
 $(document).ready(function(){
@@ -119,10 +119,10 @@ $(document).ready(function(){
 <table width="360" border="0" align="center">
   <tr>
     <td align="center" style="font-size:20px;  font-weight:bold;font-family:Arial, 'Arial Black', 'Arial Narrow';">St. Mary's Academy of San Nicolas</td>
-   
+
   </tr>
   <tr>
-    <td style="font-size:17px; font-weight:bold; font-family:Arial, 'Arial Black', 'Arial Narrow';" align="center">T. Abella St., Cebu City</td>   
+    <td style="font-size:17px; font-weight:bold; font-family:Arial, 'Arial Black', 'Arial Narrow';" align="center">T. Abella St., Cebu City</td>
   </tr>
   <tr>
     <td height="50" align="center" style="font-size:22px; font-family:Arial, 'Arial Black', 'Arial Narrow';">List of Unreturned Books</td>
@@ -146,15 +146,15 @@ $(document).ready(function(){
 </tr>
  <?php include('config.php');
  $printcount=0;
- for($i=0;$i<count($_POST['checkbox']);$i++){ 
+ for($i=0;$i<count($_POST['checkbox']);$i++){
  $printcount++;
- $borrowid = $_POST['checkbox'][$i]; 
+ $borrowid = $_POST['checkbox'][$i];
 
- $sql =mysql_query("SELECT * FROM tblborrow WHERE borrowid='$borrowid'"); 
+ $sql =mysql_query("SELECT * FROM tblborrow WHERE borrowid='$borrowid'");
 
 
   while($row=mysql_fetch_array($sql)){
-	 
+
 	   ?>
 
 <tr align="center" height="30">
@@ -178,9 +178,9 @@ while($title=mysql_fetch_array($qs)){
 
 
 <!--end of printing -->
- <?php } 
+ <?php }
  }
- 
+
  ?>
  </thead>
 
@@ -191,14 +191,14 @@ while($title=mysql_fetch_array($qs)){
  else{
  ?>
 
-<?php 
+<?php
    include('config.php');
-  
+
 	 $qss="SELECT * FROM tblborrow where status='Unsigned'";
 	 $rss=mysql_query($qss);
 
 //
-   ?> 
+   ?>
       <form action="" method="post">
 
 <table border="0" style="margin-top:20px; margin-left:0;">
@@ -224,11 +224,11 @@ while($title=mysql_fetch_array($qs)){
     <td class="web" width="400" align="center">Boook Title</td>
     <td class="web" width="240" align="center">Borrowers Name</td>
     <td class="web" width="240" align="center">Date of Lend</td>
-   
-    
-    <?php 
+
+
+    <?php
 	include('config.php');
-$q="select * from tblborrow where status='Unsigned'";
+$q="select * from book_loans where date_in = '0000-00-00'";
 $rs=mysql_query($q);
 
 $count=0;
@@ -237,11 +237,11 @@ $num=mysql_num_rows($rs);
 
 while($row=mysql_fetch_array($rs)){
 	$count++;
-	
+
 	?>
   </tr>
- 
-  
+
+
    <tr  class="trsss"  align="center" height="25">
    <td>
 
@@ -253,31 +253,31 @@ while($row=mysql_fetch_array($rs)){
 	 echo $row['accNo']; ?>
     </td>
     <td  width="400"><?php
-	$qs=mysql_query("select * from books where accNo=$row[accNo]");
+	$qs= mysql_query("SELECT * from book where book_id={$row['book_id']}");
 while($title=mysql_fetch_array($qs)){
-	 echo $title['booktitle']; }?></td>
+	 echo $title['title']; }?></td>
     <td width="180">
     <?php
-	$qs=mysql_query("select * from tblborrower where studentid=$row[studentid]");
+	$qs=mysql_query("select * from borrower where card_no=$row[card_no]");
 while($title=mysql_fetch_array($qs)){
 	 echo $title['fname']."&nbsp;".$title['lname']; }?>
     </td>
-    <td><?php echo date_format(date_create($row['dateborrow']), 'F d, Y'); ?></td>
+    <td><?php echo date_format(date_create($row['date_out']), 'F d, Y'); ?></td>
 
-  
-   
+
+
     </tr>
-    
-   <?php 
-} ?> 
+
+   <?php
+} ?>
       </thead>
   </table>
- 
+
   <?php } ?>
     </div>
 
   <!--footer-->
-    
+
       <script>
 /* function OpenPopUp(borrowid, pageURL, title,w,h) {
 	     //alert("Pardeep")
@@ -286,7 +286,7 @@ var top = (screen.height/2)-(h/2);
       var targetWin =  window.open('http://localhost/lib/unreturn_check.php?borrowid=' + borrowid, 'name', 'location=no,menubar=no,wiscrollbars=no,resizable=no,fullscreen=no,width='+w+', height='+h+', top='+top+', left='+left);
         return false;
     }*/
-	
+
 
 </script>
 <div class="footer">
@@ -303,7 +303,7 @@ var top = (screen.height/2)-(h/2);
  <td>Count of Unreturn Books</td>
 <td><input type="text" value="<?php echo $num; ?>" style="padding:2px; width:60px;" readonly="readonly"></td>
   <?php } ?>
-  
+
   <td>
 <?php
  if(isset($_POST['print'])){  ?>
@@ -311,7 +311,7 @@ var top = (screen.height/2)-(h/2);
  <?php }else{?>
  <input type="submit" value="Print Report" name="print">
 
- 
+
  <?php } ?>
 </td>
 </tr>

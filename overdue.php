@@ -5,7 +5,7 @@ if(function_exists('date_default_timezone_set')) date_default_timezone_set($time
 ?>
 <style>
 .trss:nth-child(2n+1){
-	
+
 	background-color:#CCC;}
 .trss:hover{background-color:#D5DEFF;
 
@@ -24,7 +24,7 @@ if(function_exists('date_default_timezone_set')) date_default_timezone_set($time
 
         });
 
- 
+
 
         // if all checkbox are selected, then check the select all checkbox
 
@@ -32,7 +32,7 @@ if(function_exists('date_default_timezone_set')) date_default_timezone_set($time
 
         $(".name").click(function () {
 
- 
+
 
             if ($(".name").length == $(".name:checked").length) {
 
@@ -44,7 +44,7 @@ if(function_exists('date_default_timezone_set')) date_default_timezone_set($time
 
             }
 
- 
+
 
         });
 
@@ -52,7 +52,7 @@ if(function_exists('date_default_timezone_set')) date_default_timezone_set($time
 
 </SCRIPT>
 
-<?php 
+<?php
 
 if(isset($_POST['overreport'])){
 include('overreport.php');
@@ -90,7 +90,7 @@ include('overreport.php');
 
 <?php
 
-$duedate=mysql_query("select * FROM tblborrow where status='Unsigned' order by duedate");
+$duedate=mysql_query("select * FROM book_loans where due_date < NOW() order by due_date");
 
 
 
@@ -99,15 +99,15 @@ $c=1;
 while($row=mysql_fetch_array($duedate)){
 
 $count++;
-$borrower=mysql_query("select * from tblborrower where studentid='".$row['studentid']."'");
+$borrower=mysql_query("select * from borrower where card_no='".$row['card_no']."'");
 
 $stud=mysql_fetch_array($borrower);
 
-$bo=mysql_query("select * from books where accNo='".$row['accNo']."'");
+$bo=mysql_query("select * from book where book_id='".$row['book_id']."'");
 $book=mysql_fetch_array($bo);
 
 
-$date1=date_format(date_create($row['duedate']), 'Y/m/d')."<br>";
+$date1=date_format(date_create($row['due_date']), 'Y/m/d')."<br>";
 
 $date2=date_format(date_create(date("Y/m/d")), 'Y/m/d')."<br>";
 
@@ -130,8 +130,8 @@ $numberDays = intval($numberDays); ?>
 <tr class="trss" >
 <td><input name="checkbox[]" class="name" type="checkbox"  value="<?php echo $row['borrowid']; ?>"></td>
 <td><?php echo $count;?></td>
-<td><?php echo $row['accNo']; ?></td>
-<td><?php echo $book['booktitle']; ?></td>
+<td><?php echo $row['card_no']; ?></td>
+<td><?php echo $book['title']; ?></td>
 <td><?php echo $stud['fname']."&nbsp".$stud['lname']; ?></td>
 <td><?php echo date_format(date_create($row['duedate']), 'F d, Y'); ?></td>
 <td>
@@ -167,7 +167,7 @@ $numberDays = intval($numberDays); ?>
  <td>Count of Over Due Books</td>
 <td><input type="text" value="<?php echo $j; ?>" style="padding:2px; width:60px;" readonly="readonly"></td>
   <?php } ?>
-  
+
   <td>
 <?php
  if(isset($_POST['overreport'])){  ?>
@@ -175,7 +175,7 @@ $numberDays = intval($numberDays); ?>
  <?php }else{?>
  <input type="submit" value="Print Report" name="overreport">
 </form>
- 
+
  <?php } ?>
 </td>
 </tr>
