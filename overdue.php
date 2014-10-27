@@ -4,10 +4,9 @@ if(function_exists('date_default_timezone_set')) date_default_timezone_set($time
 
 ?>
 <style>
-.trss:nth-child(2n+1){
-
-	background-color:#CCC;}
-.trss:hover{background-color:#D5DEFF;
+.trss{
+	background-color:#FFCC99;}
+.trss:hover{background-color:#F90;
 
 }
 
@@ -62,7 +61,7 @@ include('overreport.php');
 
 <table border="0" style="margin-top:20px; margin-left:38px;">
 <tr>
-<td rowspan="3"><img src="icons/phone_book_edit.png" height="50"></td>
+<td rowspan="3">&nbsp;</td>
 <tr>
 <td style="font-size:18px;font-family:Verdana, Geneva, sans-serif; border-bottom:#666 solid 1px; ">List of Overdue Books</td>
 </tr>
@@ -75,15 +74,14 @@ include('overreport.php');
 
 <form action="" method="post">
 
-<table width="89%" bordercolor="#999999" class="web" border="0" cellspacing="1" style="border:#666 solid 1px;
+<table cellpadding="5px" width="92%" align="center" bordercolor="#999999" class="web" border="0" cellspacing="1" style="border:#666 solid 1px;
  margin-bottom:20px; margin-left:38px; margin-right:45px; font-size:12px;font-family:Verdana, Geneva, sans-serif; margin-top:20px;">
 <thead>
-<tr bgcolor="#3B5998" height="30" style="color:white;  font-weight:bold; text-align:left;" >
-<td><input type="checkbox" id="selectall"/></td>
+<tr bgcolor="#F90" height="30" style="color:#000;  font-weight:bold; text-align:left;" >
 <td>No.</td>
-   <td class="web" width="100" align="center">Acc No</td>
-    <td class="web" width="300" align="center">Boook Title</td>
-    <td class="web" width="200" align="center">Borrowers Name</td>
+   <td class="web" width="100" align="center">Card No</td>
+    <td class="web" width="300" align="center">Book Title</td>
+    <td class="web" width="200" align="center">Borrower's Name</td>
     <td class="web" width="150" align="center">Due Date</td>
     <td class="web" width="200" align="center" colspan="3">Count&nbsp;of&nbsp;days</td>
 </tr>
@@ -127,8 +125,7 @@ $numberDays = $timeDiff/86400;  // 86400 seconds in one day
 // and you might want to convert to integer
 $numberDays = intval($numberDays); ?>
 
-<tr class="trss" >
-<td><input name="checkbox[]" class="name" type="checkbox"  value="<?php echo $row['borrowid']; ?>"></td>
+<tr class="trss" align="center" >
 <td><?php echo $count;?></td>
 <td><?php echo $row['card_no']; ?></td>
 <td><?php echo $book['title']; ?></td>
@@ -160,8 +157,6 @@ $numberDays = intval($numberDays); ?>
 <tr>
 <?php
  if(isset($_POST['overreport'])){  ?>
-<td>Print Record(s)</td>
-<td><input type="text" value="<?php echo  $printcount; ?>" style="padding:2px; width:60px;" readonly="readonly"></td>
 
  <?php }else{?>
  <td>Count of Over Due Books</td>
@@ -171,10 +166,8 @@ $numberDays = intval($numberDays); ?>
   <td>
 <?php
  if(isset($_POST['overreport'])){  ?>
-    <img src="icons/print.png" height="20" style="cursor:pointer;" title="Print"  onClick="javascript:printDiv('printablediv')"/>
- <?php }else{?>
- <input type="submit" value="Print Report" name="overreport">
-</form>
+<?php }else{?>
+  </form>
 
  <?php } ?>
 </td>
