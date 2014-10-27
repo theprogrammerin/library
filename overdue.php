@@ -82,8 +82,10 @@ include('overreport.php');
    <td class="web" width="100" align="center">Card No</td>
     <td class="web" width="300" align="center">Book Title</td>
     <td class="web" width="200" align="center">Borrower's Name</td>
-    <td class="web" width="150" align="center">Due Date</td>
-    <td class="web" width="200" align="center" colspan="3">Count&nbsp;of&nbsp;days</td>
+    <td class="web" width="120" align="center">Due Date</td>
+    <td class="web" width="150" align="center">Count&nbsp;of&nbsp;days
+    </td>
+    <td class="web" width="120" align="center">Fine Amount</td>
 </tr>
 
 <?php
@@ -120,10 +122,12 @@ $endTimeStamp = strtotime(date("Y/m/d"));
 $startTimeStamp = strtotime($row['due_date']);
 $timeDiff = abs($endTimeStamp - $startTimeStamp);
 
-$numberDays = $timeDiff/86400;  // 86400 seconds in one day
+$numberDays = ceil($timeDiff/86400);  // 86400 seconds in one day
+$numberDays = intval($numberDays); 
+$fineamt = ($numberDays * 0.25);
 
-// and you might want to convert to integer
-$numberDays = intval($numberDays); ?>
+?>
+
 
 <tr class="trss" align="center" >
 <td><?php echo $count;?></td>
@@ -134,6 +138,7 @@ $numberDays = intval($numberDays); ?>
 <td>
 <input type="hidden" name="countdays" value="<?php echo $numberDays; ?>">
 <?php echo $numberDays; ?></td>
+<td><?php echo ("$")."&nbsp".$fineamt; ?></td>
 </tr>
 <?php
 

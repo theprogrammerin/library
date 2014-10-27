@@ -92,12 +92,26 @@ jQuery(function($){
 			font-weight:bold;
 			margin-left:35px;
 			padding-top:7px;}
+			
+.menubar{
+	font-family:Verdana, Geneva, sans-serif;	
+	color:#090;
+}
 </style>
 <div class="header">
 </div> 
 
 <?php include('viewmenu.php'); ?>
 <div class="wrapperdiv">
+<div align="center" class="menubar">
+<h3>The University of Texas at Dallas</h3>
+<h4>Library Management System</h4>
+<div align="right">
+<a href="login.php" title="Log In">Admin Login</a>&nbsp;&nbsp;
+<a href="welcome.php" title="Home">Home</a>
+</div>
+</div>
+
 <div class="head">
 <div class="head_title">
 <?php if(isset($_GET['findBooks'])){ ?>Browse Books<?php }

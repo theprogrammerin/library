@@ -27,7 +27,8 @@ exit;
 <body>
 
 <div class="header"></div> 
-<?php include('admin.php'); 
+<?php include('admin.php');
+
 ?>
 <center>
 <?php
@@ -36,7 +37,8 @@ exit;
 <div id="status">
 <div class="wrapstat">
  <br/> <br/>
- 
+ <div align="right"><a href="welcome.php" title="Home" style="font-family:Verdana, Geneva, sans-serif;">Home</a></div>
+
  <div align="center">
  <h3 id="headline"> The University of Texas at Dallas</h3>
  <h3 id="headline">Admin Login</h3>

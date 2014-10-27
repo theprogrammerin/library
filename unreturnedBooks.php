@@ -85,8 +85,6 @@
 <div style=" margin-left:7px; margin-top:13px; color:#030; font-size:15px; font-family:Verdana, Geneva, sans-serif; font-weight:bold;float:left">Error</div>
 </div>
 
-<div style="font-size:15px; padding-top:40px; margin-left:20px; margin-right:20px; font-family:Arial, Helvetica, sans-serif; text-align:center">Choose to print
-</div>
 
 <div class="btnbox" id="closeempty" style="cursor:pointer;">
 <div style="font:14px; font-family:Verdana, Geneva, sans-serif; color:#FFF; font-weight:bold; text-align:center; margin-top:5px;">OK</div>
@@ -141,7 +139,7 @@ $(document).ready(function(){
 
 <table width="100%" bordercolor="#999999" class="web" border="0" cellspacing="1" style="border:#666 solid 1px; margin-bottom:20px; margin-left:0px;font-size:12px;font-family:Verdana, Geneva, sans-serif; margin-top:20px;">
 <thead>
-<tr bgcolor="#F90" height="30"  style="color:white;  font-weight:bold; text-align:left;">
+<tr bgcolor="#F90" height="30"  style="color:black;  font-weight:bold; text-align:left;">
 <td>No.</td>
    <td class="web" width="100" align="center">Card No.</td>
     <td class="web" width="400" align="center">Book Title</td>
