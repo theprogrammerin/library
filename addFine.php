@@ -121,7 +121,7 @@ $("#display").html(html).show();
 });
 
 jQuery(function($){
-   $("#searchbox").Watermark("Search StudentID, Name");
+   $("#searchbox").Watermark("Search Student ID, Name");
    });
 
 
@@ -191,7 +191,7 @@ function updateFine() {
 <div style=" margin-left:7px; margin-top:13px; color:#030; font-size:15px; font-family:Verdana, Geneva, sans-serif; font-weight:bold;float:left">Error</div>
 </div>
 
-<div style="font-size:15px; padding-top:40px; margin-left:20px; margin-right:20px; font-family:Arial, Helvetica, sans-serif; text-align:center">Tulo sa ang limit karun
+<div style="font-size:15px; padding-top:40px; margin-left:20px; margin-right:20px; font-family:Arial, Helvetica, sans-serif; text-align:center">
 </div>
 
 <div class="btnbox" id="closeerror">
@@ -207,7 +207,7 @@ function updateFine() {
 <div style=" margin-left:7px; margin-top:13px; color:#030; font-size:15px; font-family:Verdana, Geneva, sans-serif; font-weight:bold;float:left">Error</div>
 </div>
 
-<div style="font-size:15px; padding-top:40px; margin-left:20px; margin-right:20px; font-family:Arial, Helvetica, sans-serif; text-align:center">You Can Borrow Only 1 types of Books
+<div style="font-size:15px; padding-top:40px; margin-left:20px; margin-right:20px; font-family:Arial, Helvetica, sans-serif; text-align:center">
 </div>
 
 <div class="btnbox" id="closeerror2">
@@ -305,7 +305,7 @@ $get=mysql_fetch_array($rs);
 </tr>
 </table>
 <table border="0" wi style="font-size:12px; font-family:Arial, 'Arial Black', 'Arial Narrow'; font-weight:bold; border:inset #999 1px;width: 420px;  margin-top:10px; margin-bottom:20px; float:left; margin-left:20px;">
-<tr><td colspan="3">Loan ID</td></tr>
+<tr><td colspan="3">Loan ID - Book Title</td></tr>
 <tr>
 <td colspan="3">
 <select id="loan_id" name="loan_id"
@@ -383,13 +383,7 @@ selected <?php } ?>>Paid</option>
 
 </td>
 <td class="value" align="center" style="width:25px;">
- <div id="id" title="Change default value">
-  <a href="" style="margin-right:10px;" id=""
-    onclick="OpenPopUp(id,'','',300,100);" class='trnone'>
-
-<img src="icons/b_edit.png"  />
-</a>
-</div>
+ <div id="id" title="Change default value"></div>
 </td>
 </tr>
 </table>

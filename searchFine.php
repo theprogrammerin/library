@@ -81,8 +81,7 @@ jQuery(function($){
 </div>
 <div class="hed">
 <style>
-.web{ -webkit-border-radius:7px 7px 0px 0px;
- -moz-border-radius:7px 7px 0px 0px;
+.web{ 
  text-align:center; font-size:12px; font-weight:bold; font-family:Arial, "Arial Black", "Arial Narrow"; color:#000;
 }
 </style>
