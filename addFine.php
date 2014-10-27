@@ -349,7 +349,7 @@ selected <?php } ?> >
       $fine = $data["fine_amt"];
     }
   ?>
-    <input type="text" name="fine_amt" value="<?= $fine ?>" />
+    <input type="text" name="fine_amt" value="<?php echo $fine ?>" />
     <select name="paid">
       <option value="0" <?php if($data["paid"] == 0) {?>
 selected <?php } ?> >UnPaid</option>
