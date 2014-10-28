@@ -39,7 +39,7 @@ if(isset($_POST['page'])) {
 	$page = $_POST['page'];
 }
 
-$sql_res="select * from borrower where fname like '$q%' or lname like '$q%' or card_no like '$q%' ";
+$sql_res="select * from borrower where fname like '$q%' or lname like '$q%' or card_no like '$q%' limit 5";
 }
 
 $r=mysql_query($sql_res);
@@ -72,7 +72,7 @@ $flname = str_ireplace($q, $rlname, $lname);
 
 <td style="font-size:13px; font-weight:bold; color:#666;" width="346"><?php echo $j;  ?>
 <div class="td"><div style="padding-top:0;">
-<?php echo $ffname; ?>&nbsp;<?php echo $flname; ?>&nbsp;<?php echo $fmi; ?></div>
+<?php echo $final_idnumber; ?>&nbsp; - &nbsp;<?php echo $ffname; ?>&nbsp;<?php echo $flname; ?></div>
 </div></a></td>
 
 <tr><td style="font-size:11px;color:#666;" width="346"><?php echo $j;  ?>

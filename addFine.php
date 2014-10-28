@@ -1,4 +1,5 @@
 <?php
+
 require_once('calendar/classes/tc_calendar.php');
 ?>
 
@@ -121,7 +122,7 @@ $("#display").html(html).show();
 });
 
 jQuery(function($){
-   $("#searchbox").Watermark("Search Student ID, Name");
+   $("#searchbox").Watermark("Search Card No., Student Name");
    });
 
 
@@ -319,6 +320,7 @@ $sql="SELECT * FROM book_loans INNER JOIN book ON book_loans.book_id = book.book
 echo $sql;
 $rs=mysql_query($sql);
 $class=0;
+
 
 while($row=mysql_fetch_array($rs)){
 	$class++;
