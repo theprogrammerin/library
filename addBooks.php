@@ -70,8 +70,9 @@ $(document).ready(function(){
 <?php
 include('config.php');
 if(isset($_GET['book_id'])){
-	$book_id=$_GET['book_id'];
-	$query1 = "select * from book RIGHT JOIN book_authors ON book.book_id = book_authors.book_id RIGHT JOIN book_copies ON book.book_id = book_copies.book_id WHERE book.book_id=$book_id";
+  $book_id=$_GET['book_id'];
+	$branch_id=$_GET['branch_id'];
+	$query1 = "select * from book RIGHT JOIN book_authors ON book.book_id = book_authors.book_id RIGHT JOIN book_copies ON book.book_id = book_copies.book_id WHERE book.book_id=$book_id AND book_copies.branch_id = $branch_id";
 $get=mysql_query($query1);
 $edit=mysql_fetch_array($get);
 
@@ -135,7 +136,7 @@ while($row=mysql_fetch_array($rs)){
 	$class++;
  ?>
 <option style="font-size:15px;"
-<?php if($edit['bookbranch']==$row['branch_name']){ ?>
+<?php if($edit['branch_id']==$row['branch_id']){ ?>
 selected="selected"
 <?php }else{} ?>
  value="<?php echo $row['branch_name'];?>">

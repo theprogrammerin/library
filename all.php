@@ -5,7 +5,7 @@
 <table width="853" border="0" cellspacing="1" style="  margin-left:15px;background:#F90;font-size:12px; font-family:Verdana, Geneva, sans-serif;">
 <?php
 	include('database/config.php');
-$q="select b.book_id, title, author_name, branch_name, no_of_copies, IFNULL(no_issued, 0) AS no_issued, (no_of_copies- IFNULL(no_issued, 0)) AS no_available from book b
+$q="select b.book_id, title, author_name, lc.branch_id, branch_name, no_of_copies, IFNULL(no_issued, 0) AS no_issued, (no_of_copies- IFNULL(no_issued, 0)) AS no_available from book b
 join book_authors ba on b.book_id  = ba.book_id
 join book_copies bc on b.book_id=bc.book_id
 join library_branch lc on bc.branch_id = lc.branch_id
@@ -35,7 +35,7 @@ while($row=mysql_fetch_array($rs)){
    <td class="view">
 <a href="?addBooks&book_id=<?php echo $row['book_id'] ?>&view">View</a></td>
 
-   <td class="edit"><a  href="?addBooks&book_id=<?php echo $row['book_id']; ?>">Edit</a></td>
+   <td class="edit"><a  href="?addBooks&book_id=<?php echo $row['book_id']; ?>&branch_id=<?php echo $row['branch_id']; ?>">Edit</a></td>
    <td class="del">
 <?php echo '<div align="center"><a href="#" id="'.$row['book_id'].'" class="delbutton">Delete</a></div>'; ?>
 
