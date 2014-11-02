@@ -89,8 +89,8 @@ include('overreport.php');
 </tr>
 
 <?php
-
-$duedate=mysql_query("select * FROM book_loans where due_date < NOW() AND date_in = '0000-00-00' order by due_date");
+$FINE_AMT = 0.25;
+$duedate=mysql_query("SELECT *, DATEDIFF(NOW(), due_date) AS due_days, (DATEDIFF(NOW(), due_date)* $FINE_AMT) AS fine FROM `book_loans` WHERE date_in = '0000-00-00' AND due_date < NOW()");
 
 
 
@@ -106,26 +106,7 @@ $stud=mysql_fetch_array($borrower);
 $bo=mysql_query("select * from book where book_id='".$row['book_id']."'");
 $book=mysql_fetch_array($bo);
 
-
-$date1=date_format(date_create($row['due_date']), 'Y/m/d')."<br>";
-
-$date2=date_format(date_create(date("Y/m/d")), 'Y/m/d')."<br>";
-
-if($date1<$date2){
-
-$j= count+($c++);
-
-$start=date_format(date_create($row['due_date']), 'Y/m/d')."<br>";
-$today=date_format(date_create(date("Y/m/d")), 'Y/m/d')."<br>";
-
-$endTimeStamp = strtotime(date("Y/m/d"));
-$startTimeStamp = strtotime($row['due_date']);
-$timeDiff = abs($endTimeStamp - $startTimeStamp);
-
-$numberDays = ceil($timeDiff/86400);  // 86400 seconds in one day
-$numberDays = intval($numberDays); 
-
-$fineamt = ($numberDays * 0.25);
+$fineamt = $row['fine'];
 
 ?>
 
@@ -137,13 +118,12 @@ $fineamt = ($numberDays * 0.25);
 <td><?php echo $stud['fname']."&nbsp".$stud['lname']; ?></td>
 <td><?php echo date_format(date_create($row['due_date']), 'F d, Y'); ?></td>
 <td>
-<input type="hidden" name="countdays" value="<?php echo $numberDays; ?>">
-<?php echo $numberDays; ?></td>
+<input type="hidden" name="countdays" value="<?php echo $row['due_days']; ?>">
+<?php echo  $row['due_days']; ?></td>
 <td><?php echo ("$")."&nbsp".$fineamt; ?></td>
 </tr>
 <?php
 
-}
 
 
 
