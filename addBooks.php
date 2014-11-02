@@ -145,28 +145,6 @@ selected="selected"
 </select>
 
 </td>
-<?php
-
-
-switch ($branch_name) {
-  case "Oak Lawn":
-    $branch_id="1";
-    break;
-  case "Lakewood":
- 	$branch_id="2";
-    break;
-  case "Grauwyler Park":
-    $branch_id="3";
-    break;
-  case "Highland Hills":
-    $branch_id="4";
-    break;
-  case "Audelia Road":
-    $branch_id="5";
-    break;
-
-}
-?>
 <td ></td><td></td>
 
 </tr>
@@ -205,6 +183,25 @@ switch ($branch_name) {
   <?php } ?>
 <?php
 
+switch ($_POST['bookbranch']) {
+  case "Oak Lawn":
+    $branch_id="1";
+    break;
+  case "Lakewood":
+  $branch_id="2";
+    break;
+  case "Grauwyler Park":
+    $branch_id="3";
+    break;
+  case "Highland Hills":
+    $branch_id="4";
+    break;
+  case "Audelia Road":
+    $branch_id="5";
+    break;
+
+}
+
 
 if(isset($_POST['add'])){
 	$book_id=$_POST['book_id'];
@@ -213,8 +210,6 @@ $author=$_POST['author_name'];
 $bookbranch=$_POST['branch_name'];
 $authortype=$_POST['type'];
 $copies=$_POST['no_of_copies'];
-
-
 
 
 $auth_type ="2";
@@ -250,7 +245,6 @@ $insert2="Insert into book_authors(book_id, author_name, type)
  values('$_POST[book_id]','$_POST[author]','".$auth_type."')";
 $insert3="Insert into book_copies(book_id, branch_id, no_of_copies)
  values('$_POST[book_id]',".$branch_id.",'$_POST[copies]')";
-
 
 
 $rs1=mysql_query($insert1) or die(mysql_error());
