@@ -309,7 +309,7 @@ if($print['levelyr']==1){
 Date Borrowed:</td><td><input type="text" readonly="readonly" value="
 <?php //echo $name['dateborrow'];
 
-echo date_format(date_create($name['dateborrow']), 'F j, Y');
+echo date_format(date_create($name['date_out']), 'F j, Y');
 ?>
 <?php //echo $name['dateborrow']; ?>" style="padding:4px; width:226px;">
 </tr></tr>
@@ -325,14 +325,14 @@ Book Title:</td><td><textarea style="padding:6px; width:330px;" value="" readonl
 </td></tr>
 <tr><td>
 Date Due:</td><td><input style="padding:4px; width:226px;" readonly="readonly" name="datedue" type="text"
-value="<?php echo date_format(date_create($name['duedate']), 'F j, Y'); ?>
+value="<?php echo date_format(date_create($name['due_date']), 'F j, Y'); ?>
 ">
 </td></tr>
 <tr><td>
 <?php
 
 //echo date('Y-m-d');
-switch (date_format(date_create($name['dateborrow']), 'm')) {
+switch (date_format(date_create($name['date_out']), 'm')) {
 	  case '01':
 	    $bmonth1 = "selected"; break;
 	  case '02':
@@ -401,11 +401,11 @@ $boks=mysql_fetch_array($s);
 
 $id=$_GET['borrowid'];
 	//$datedue=$name['duedate'];
-	$datedue=date_format(date_create($name['duedate']), 'm j, Y');
+	$datedue=date_format(date_create($name['due_date']), 'm j, Y');
 	$sig=$_POST['sig'];
 	$bookid=$_POST['bookid'];
 
-  $borrowed=date_format(date_create($name['dateborrow']), 'm j, Y');
+  $borrowed=date_format(date_create($name['date_out']), 'm j, Y');
   $theDate  = isset($_REQUEST["date5"]) ? $_REQUEST["date5"] : "";
   $format=date_format(date_create(date("m/d/y")), 'm j, Y');
 
@@ -465,20 +465,11 @@ if(isset($_POST['save1'])){
         $accNo=$_POST['accNo'];
  $bid=$_POST['bid'];
 
-$sql="insert into tblreciept (studentid,accNo,borrowid,datedue,datereturn,totaldays,totalpay) values(
-	'".$bor."',
-        '".$accNo."',
-        '".$bid."',
-	'".$dat."',
-	'".$dater."',
-	'".$tota."',
-	'".$tot."'
-	)";
 
-	$pay=mysql_query($sql) or die (mysql_error());
+	$pay=true;
 if($pay){
 
-	$update2="update tblborrow set datereturn='$re',item='0', status='Signed' where borrowid='$id'";
+	$update2="update book_loans set date_in='$re' where loan_id='$id'";
 	$objExec2 = mysql_query($update2)or die(mysql_error());
 
 	?>
