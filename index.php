@@ -64,6 +64,7 @@ include("config.php");
 <?php if(isset($_GET['unreturnbook'])){ ?>unreturn Borrower<?php } ?>
 <?php if(isset($_GET['unreturnedBooks'])){ ?>List of Unreturned Books<?php } ?>
 <?php if(isset($_GET['Booklist'])){ ?>List of Books<?php } ?>
+<?php if(isset($_GET['cron'])){ ?>Update Fines<?php } ?>
 
 </div>
 </div>
@@ -111,6 +112,9 @@ elseif(isset($_GET['returnBooks'])){
 elseif(isset($_GET['overdue'])){
 	 include('overdue.php');
 	}
+elseif(isset($_GET['cron'])){
+   include('cron.php');
+  }
 
 /*----------------------------------------------*/
 
