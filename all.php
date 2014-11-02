@@ -37,7 +37,7 @@ while($row=mysql_fetch_array($rs)){
 
    <td class="edit"><a  href="?addBooks&book_id=<?php echo $row['book_id']; ?>&branch_id=<?php echo $row['branch_id']; ?>">Edit</a></td>
    <td class="del">
-<?php echo '<div align="center"><a href="#" id="'.$row['book_id'].'" class="delbutton">Delete</a></div>'; ?>
+<?php echo '<div align="center"><a href="#" id="'.$row['book_id'].'-'.$row['branch_id'].'" class="delbutton" >Delete</a></div>'; ?>
 
    </td>
 
