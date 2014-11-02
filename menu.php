@@ -69,6 +69,7 @@ margin-left:27px;}
                 <ul>
                     <li><a href="?addFine">Add Fine</a></li>
                     <li><a href="?searchFine">View Fine</a></li>
+                    <li><a href="?cron">Update Fine</a></li>
                 </ul>
             </li>
             <li>
