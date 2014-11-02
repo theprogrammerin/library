@@ -5,11 +5,11 @@
 <table width="853" border="0" cellspacing="1" style="  margin-left:15px;background:#F90;font-size:12px; font-family:Verdana, Geneva, sans-serif;">
 <?php
 	include('database/config.php');
-$q="select b.book_id, title, author_name, branch_name, no_of_copies, no_issued, (no_issued + no_of_copies) AS no_total from book b
+$q="select b.book_id, title, author_name, branch_name, no_of_copies, IFNULL(no_issued, 0) AS no_issued, (no_of_copies- IFNULL(no_issued, 0)) AS no_available from book b
 join book_authors ba on b.book_id  = ba.book_id
 join book_copies bc on b.book_id=bc.book_id
 join library_branch lc on bc.branch_id = lc.branch_id
-join (SELECT  book_id, count(*) AS no_issued FROM book_loans GROUP BY book_id) book_issues ON book_issues.book_id = b.book_id
+LEFT join (SELECT book_id, branch_id, count(*) AS no_issued FROM book_loans WHERE date_in = '0000-00-00' GROUP BY book_id, branch_id) book_issues ON book_issues.book_id = b.book_id AND lc.branch_id = book_issues.branch_id
 order by b.book_id;
 ";
 $rs=mysql_query($q);
@@ -27,10 +27,10 @@ while($row=mysql_fetch_array($rs)){
     <td width="120"><?php echo $row['author_name']; ?></td>
     <td width="120"><?php echo $row['branch_name']; ?></td>
     <td width="50" >
-	<input readonly="readonly" type="text" style="background:#FFF;padding:2px; width:20px;" value="<?php echo $row['no_total'];;
+	<input readonly="readonly" type="text" style="background:#FFF;padding:2px; width:20px;" value="<?php echo $row['no_of_copies'];;
  ?>"/></td>
  <td width="50" >
-	<input readonly="readonly" type="text" style="background:#FFF;padding:2px; width:20px;" value="<?php echo $row['no_of_copies'];;
+	<input readonly="readonly" type="text" style="background:#FFF;padding:2px; width:20px;" value="<?php echo $row['no_available'];;
  ?>"/></td>
    <td class="view">
 <a href="?addBooks&book_id=<?php echo $row['book_id'] ?>&view">View</a></td>

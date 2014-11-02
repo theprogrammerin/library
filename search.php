@@ -13,11 +13,11 @@ if(isset($_POST))
 
 $q=$_POST['searchword'];
 
-$sql_res="select b.book_id, title, author_name, branch_name, no_of_copies from book b
+$sql_res="select b.book_id, title, author_name, branch_name, no_of_copies, IFNULL(no_issued, 0) AS no_issued, (no_of_copies- IFNULL(no_issued, 0)) AS no_available from book b
 join book_authors ba on b.book_id  = ba.book_id
 join book_copies bc on b.book_id=bc.book_id
 join library_branch lc on bc.branch_id = lc.branch_id
-
+LEFT join (SELECT book_id, branch_id, count(*) AS no_issued FROM book_loans WHERE date_in = '0000-00-00' GROUP BY book_id, branch_id) book_issues ON book_issues.book_id = b.book_id AND lc.branch_id = book_issues.branch_id
 where b.book_id like '%$q%' or title like '%$q%' or author_name like '%$q%'
 order by b.book_id";
 
@@ -27,27 +27,30 @@ $r=mysql_query($sql_res);
 $items = 0;
 ?>
 
-	
+
 <?php while($row=mysql_fetch_array($r))
 {
-	 $items++; 
+	 $items++;
 $bookid=$row['book_id'];
 $booktitle=$row['title'];
 $author=$row['author_name'];
 $branch=$row['branch_name'];
 $copies=$row['no_of_copies'];
+$available = $row['no_available'];
 
 $re_bookid='<b>'.$q.'</b>';
 $re_booktitle='<b>'.$q.'</b>';
 $rauthor='<b>'.$q.'</b>';
 $rbranch='<b>'.$q.'</b>';
 $rcopies='<b>'.$q.'</b>';
+$ravailable='<b>'.$q.'</b>';
 
 $f_bookid = str_ireplace($q, $re_bookid, $bookid);
 $fbooktitle = str_ireplace($q, $re_booktitle, $booktitle);
 $fauthor = str_ireplace($q, $rauthor, $author);
 $fbranch = str_ireplace($q, $rbranch, $branch);
 $fcopies = str_ireplace($q, $rcopies, $copies);
+$favailable = str_ireplace($q, $ravailable, $available);
 ?>
 
 
@@ -66,7 +69,7 @@ $fcopies = str_ireplace($q, $rcopies, $copies);
 	<input readonly="readonly" type="text" style="background:#FFF;padding:2px; width:50px;" value="<?php echo $fcopies;
  ?>"/></td>
  <td width="50" >
-	<input readonly="readonly" type="text" style="background:#FFF;padding:2px; width:50px;" value="<?php echo $fcopies;
+	<input readonly="readonly" type="text" style="background:#FFF;padding:2px; width:50px;" value="<?php echo $favailable;
  ?>"/></td>
 
 <td class="view" width="35">
@@ -77,8 +80,8 @@ $fcopies = str_ireplace($q, $rcopies, $copies);
 <td class="del">
 <?php echo '<div align="center"><a href="#" id="'.$row['book_id'].'" class="delbutton" >Delete</a></div>'; ?>
    </td>
- 
- 
+
+
 </tr>
 
 
@@ -98,7 +101,7 @@ if($items==0){ ?>
 Search Not Found</div>
 
 <?php	}
- 
+
 }
 
 ?>
@@ -125,7 +128,7 @@ var info = 'bookid=' + del_id;
    url: "delete.php",
    data: info,
    success: function(){
-   
+
    }
  });
          $(this).parents(".hr").animate({ backgroundColor: "#fbc7c7" }, "fast")

@@ -452,24 +452,7 @@ else{
 	$rs_update=mysql_query($sql);
 	if($rs_update){
 
-
-$upd="select * from book_copies where book_id='".$_GET['accNo']."'";
-		$obj = mysql_query($upd);
-$cop=mysql_fetch_array($obj);
-
-if(isset($_GET['accNo'])){
-
-		$get=$cop['no_of_copies']-1;
-}else{
-
-$get=$copy-1;
-}
-
-$update="update book_copies set no_of_copies='$get' where book_id='$accNo'";
-		$objExec = mysql_query($update);
-if($objExec){
-		 ?>
-
+?>
 		<script>
 $(document).ready(function(){
     $("#success").fadeIn(1000);
@@ -477,8 +460,6 @@ $(document).ready(function(){
 </script>
 <?php
 	//echo "Your Borrow has been Registered";
-	}
-
 
 	}
 	}

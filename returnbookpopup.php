@@ -395,7 +395,6 @@ $bookid=mysql_fetch_array($get);*/
 $query12 = "select * from book where book_id=$name[book_id]";
 $s=mysql_query($query12);
 $boks=mysql_fetch_array($s);
-$add=$boks['bookcopies']+1;
 ?>
 <?php
 
@@ -481,16 +480,14 @@ if($pay){
 
 	$update2="update tblborrow set datereturn='$re',item='0', status='Signed' where borrowid='$id'";
 	$objExec2 = mysql_query($update2)or die(mysql_error());
-if($objExec2){
-		$up2="update books set bookcopies='$add' where accNo='".$boks['accNo']."'";
-	mysql_query($up2)or die(mysql_error());?>
+
+	?>
 <script>
 $(document).ready(function(){
     $("#div2").fadeIn(1000);
 });
 </script>
 	<?php
-	}
 }
 }
 ?>
