@@ -28,7 +28,7 @@ margin-left:27px;}
    <div class="menu">
         <ul>
         <li>
-                <a href="#"><span class="img"></span>&nbsp;Home&nbsp;<span class="arrow"></span>&nbsp|</a>
+                <a href="#"><span class="img"></span>&nbsp;Home&nbsp;<span class="arrow"></span>&nbsp</a>
 
                 <ul>
 
