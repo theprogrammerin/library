@@ -6,7 +6,7 @@
 
   echo "Cron for updating daily fine.\n";
 
-  $query = "SELECT *, DATEDIFF(NOW(), due_date) AS due_days, (DATEDIFF(CURDATE() - INTERVAL 1 DAY, due_date)* $FINE_AMT) AS fine FROM `book_loans` WHERE date_in = '0000-00-00' AND due_date < NOW()";
+  $query = "SELECT *, DATEDIFF(NOW(), due_date) AS due_days, (DATEDIFF(CURDATE(), due_date)* $FINE_AMT) AS fine FROM `book_loans` WHERE date_in = '0000-00-00' AND due_date < NOW()";
   $result = mysql_query($query);
   $num = mysql_num_rows($result);
   echo "Found $num pending fines\n";
