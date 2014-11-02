@@ -71,7 +71,7 @@ $(document).ready(function(){
 include('config.php');
 if(isset($_GET['book_id'])){
 	$book_id=$_GET['book_id'];
-	$query1 = "select * from book RIGHT JOIN book_authors ON book.book_id = book_authors.book_id WHERE book.book_id=$book_id";
+	$query1 = "select * from book RIGHT JOIN book_authors ON book.book_id = book_authors.book_id RIGHT JOIN book_copies ON book.book_id = book_copies.book_id WHERE book.book_id=$book_id";
 $get=mysql_query($query1);
 $edit=mysql_fetch_array($get);
 
