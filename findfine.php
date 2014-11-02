@@ -13,7 +13,7 @@ if(isset($_POST))
 
 $q=$_POST['searchword'] || "";
 
-$sql_res="SELECT * FROM borrower INNER JOIN book_loans ON book_loans.card_no = borrower.card_no INNER JOIN fines ON book_loans.loan_id = fines.loan_id WHERE book_loans.card_no like '%$q%' or fname like '%$q%' or lname like '%$q%' ";
+$sql_res="SELECT *, SUM(fine_amt) AS total_fine FROM borrower INNER JOIN book_loans ON book_loans.card_no = borrower.card_no INNER JOIN fines ON book_loans.loan_id = fines.loan_id WHERE book_loans.card_no like '%$q%' or fname like '%$q%' or lname like '%$q%' GROUP BY book_loans.card_no ";
 $r=mysql_query($sql_res);
 $items = 0;
 ?>
@@ -62,7 +62,7 @@ $fsection = str_ireplace($q, $rsection, $section);
 <td width="190"> <?php echo $fine; ?></td>
 
  <td align="center" class="del"><a title="EDIT"  href="?addFine&card_no=<?php echo $row['card_no']; ?>&loan_id=<?php echo $row['loan_id']; ?>">Edit</a></td>
- 
+
   </tr>
 
 

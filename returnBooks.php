@@ -269,10 +269,6 @@ $allb=mysql_num_rows($all);
      <td class="webkit" >Title of Books</td>
      <td class="webkit" >Date Due</td>
      <td class="webkit">Date Returned</td>
-     <td class="webkit">Signature</td>
-    <td class="webkit"  colspan="0" align="center"><img src="icons/b_drop.png"/></td>
-    <td class="webkit"  colspan="0" align="center"><img src="icons/s_db.png" title="Penalty"/></td>
-
   </tr>
 
 <?php
@@ -367,7 +363,7 @@ if($borrower['status']=="Signed"){}else
     onclick="OpenPopUp(id,'','',800,500);" class='trnone'> <?php } ?>
 
 
-     <div class="trdiv"><?php echo date_format(date_create($borrower['dateborrow']), 'M d Y     h:i A'); ?></div> </a></td >
+     <div class="trdiv"><?php echo date_format(date_create($borrower['date_out']), 'M d Y     h:i A'); ?></div> </a></td >
     <td>
     <?php if($borrower['status']=="Signed"){}else{ ?>
     <a href="" style="margin-right:10px;" id="<?php echo $borrower['loan_id']; ?>"
@@ -386,9 +382,9 @@ if($borrower['status']=="Signed"){}else
 
  </td>
     <td> <?php if($borrower['status']=="Signed"){}else{ ?>
-    <a href="" style="margin-right:10px;" id="<?php echo $borrower['borrowid']; ?>"
+    <a href="" style="margin-right:10px;" id="<?php echo $borrower['loan_id']; ?>"
     onclick="OpenPopUp(id,'','',700,400);" class='trnone'> <?php } ?><div class="trdiv">
-	<?php echo date_format(date_create($borrower['duedate']), 'F j, Y '); ?>
+	<?php echo date_format(date_create($borrower['due_date']), 'F j, Y '); ?>
 	</div></a></td>
     <td> <div class="trdiv">
 
@@ -430,7 +426,7 @@ if(date('Y')==$i){ echo 'selected="selected"'; ?>
     <?php }else{ ?>
      <?php if($borrower['status']=="Signed"){}else{ ?>
 
-    <a href="" style="margin-right:10px;" id="<?php echo $borrower['borrowid']; ?>"
+    <a href="" style="margin-right:10px;" id="<?php echo $borrower['loan_id']; ?>"
     onclick="OpenPopUp(id,'','',700,400);" class='trnone'> <?php } ?>
 
     <div class="trdiv">
@@ -440,42 +436,10 @@ if(date('Y')==$i){ echo 'selected="selected"'; ?>
 
     </div>
     </a></td>
-    <?php }else{ echo date_format(date_create($borrower['datereturn']), 'F j, Y'); } ?>
-
-    <td><?php  if($_GET['id']==$borrower['borrowid']){?>
-     <div class="trdiv">
-     <?php if($borrower['status']=="Unsigned"){ ?>
-    <select name="sig" >
-    <option></option>
-    <option value="Signed">Signed</option>
-    </select>
-
-	<?php }?>
-    <?php }else{
-	if($borrower['status']=="Unsigned"){ ?>
-   <div class="trdiv">
-    <a href="" style="margin-right:10px;" id="<?php echo $borrower['borrowid']; ?>"
-    onclick="OpenPopUp(id,'','',700,400);" class='trnone'>
-   Unsigned </a>
-	<?php }else{
-	echo "<img src='images/tick.gif' height='15'/>".$borrower['status'];
-	 }
-	}?></div></a>
-    </td>
-
-<?php if($borrower['status']=="Unsigned"){}else{ ?>
-    <td width="30"><a href="" id="<?php echo $borrower['borrowid']; ?>" class="ass"><img src="icons/b_drop.png"/></td>
-  <?php } ?>
+    <?php }else{ echo date_format(date_create($borrower['date_in']), 'F j, Y'); } ?>
 
 
-<td>
 
-
-<?php if($borrower['item']==0) {?>
-<a href="" id=<?php echo $borrower['borrowid']; ?> onclick="Openpen(id,'','',400,400);">
-<img src="icons/s_db.png" title="Penalty"/></a>
-<?php }else{}?>
-</td>
 
 
   </tr>
