@@ -417,7 +417,7 @@ if(isset($_POST['return'])){
   if($borrowed > $format){ ?>
 			<div style="font-family:Verdana, Geneva, sans-serif; font-size:12px; color:#F00;">Invalid Date</div>
 		<?php	}
-elseif($format > $datedue){
+elseif(false){
 
 ?>
 			<script>
@@ -471,7 +471,6 @@ if($pay){
 
 	$update2="update book_loans set date_in='$re' where loan_id='$id'";
 	$objExec2 = mysql_query($update2)or die(mysql_error());
-
 	?>
 <script>
 $(document).ready(function(){
