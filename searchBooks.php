@@ -100,7 +100,7 @@ jQuery(function($){
 <table width="853"  border="0" cellspacing="1" style=" margin-left:20px;font-size:12px; font-family:Verdana, Geneva, sans-serif;">
 <thead>
 <tr bgcolor="#F90" height="30" align="center">
-   <td width="70"><strong>Book ID</strong></td>
+   <td width="75"><strong>Book ID</strong></td>
     <td  width="250"><strong>Title</strong></td>
     <td  width="120"><strong>Author</strong></td>
     <td  width="120"><strong>Branch</strong></td>

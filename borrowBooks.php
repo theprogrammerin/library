@@ -356,7 +356,7 @@ pre .builtin { color:#FF0000;  }
 	  $myCalendar->setDateFormat('F j, Y');
 	  $myCalendar->setAlignment('left', 'bottom');
 	  //$myCalendar->setSpecificDate(array("2011-04-01", "2011-04-04", "2011-12-25"), 0, 'year');
-	 // $myCalendar->setSpecificDate(array("2011-04-10", "2011-04-14"), 0, 'month');
+	 //$myCalendar->setSpecificDate(array("2011-04-10", "2011-04-14"), 0, 'month');
 	  $myCalendar->setSpecificDate(array("2011-06-01"), 0, '');
 	  $myCalendar->writeScript();
 	  ?>
@@ -364,50 +364,6 @@ pre .builtin { color:#FF0000;  }
 </td>
 </tr>
 </table>
-
-<table border="0" style=" font-weight:bold;font-size:12px; font-family:Arial, 'Arial Black', 'Arial Narrow'; margin-left:30px; margin-top:5px; border:1px inset #999;">
-<tr><td>Default Value&nbsp;&nbsp;
-<a href=""></a>
-</td>
-<td></td>
-</tr>
-<tr>
-<td>
-
-<script>
- jQuery(function($){
-   $("#pay").Watermark("<?php echo $rowpay['amount']; ?>");
-   });
-</script>
-<script>
- function OpenPopUp(borrowid, pageURL, title,w,h) {
-	     //alert("Pardeep")
-var left = (screen.width/2)-(w/2);
-var top = (screen.height/2)-(h/2);
-      var targetWin =  window.open('http://localhost/lib/default.php' + borrowid, 'name', 'location=no,menubar=no,wiscrollbars=no,resizable=no,fullscreen=no,width='+w+', height='+h+', top='+top+', left='+left);
-        return false;
-    }
-
-
-</script>
-<script type="text/javascript">
-
-</script>
-<span id="ass"></span>
-
-</td>
-<td class="value" align="center" style="width:25px;">
- <div id="id" title="Change default value">
-  <a href="" style="margin-right:10px;" id=""
-    onclick="OpenPopUp(id,'','',300,100);" class='trnone'>
-
-<img src="icons/b_edit.png"  />
-</a>
-</div>
-</td>
-</tr>
-</table>
-
 </div>
 </div>
 <div id="display">

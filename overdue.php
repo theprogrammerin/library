@@ -124,6 +124,7 @@ $timeDiff = abs($endTimeStamp - $startTimeStamp);
 
 $numberDays = ceil($timeDiff/86400);  // 86400 seconds in one day
 $numberDays = intval($numberDays); 
+
 $fineamt = ($numberDays * 0.25);
 
 ?>

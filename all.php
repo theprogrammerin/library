@@ -15,27 +15,27 @@ $rs=mysql_query($q);
 
 
 
+
+
 while($row=mysql_fetch_array($rs)){
 	?>
 
   <tr bgcolor="#FFCC99"  align="center" class="hr" height="25">
-    <td bgcolor="" width="70">
-	<?php echo $row['book_id'];?>
-    </td>
-    <td  width="250"><?php echo $row['title']; ?></td>
+    <td width="75">	<?php echo $row['book_id'];?></td>
+    <td width="250"><?php echo $row['title']; ?></td>
     <td width="120"><?php echo $row['author_name']; ?></td>
     <td width="120"><?php echo $row['branch_name']; ?></td>
     <td width="50" >
-	<input readonly="readonly" type="text" style="background:#FFF;padding:2px; width:50px;" value="<?php echo $row['no_of_copies'];;
+	<input readonly="readonly" type="text" style="background:#FFF;padding:2px; width:20px;" value="<?php echo $row['no_of_copies'];;
  ?>"/></td>
  <td width="50" >
-	<input readonly="readonly" type="text" style="background:#FFF;padding:2px; width:50px;" value="<?php echo $row['no_of_copies'];;
+	<input readonly="readonly" type="text" style="background:#FFF;padding:2px; width:20px;" value="<?php echo $row['no_of_copies'];;
  ?>"/></td>
-   <td class="view" width="35">
+   <td class="view">
 <a href="?addBooks&book_id=<?php echo $row['book_id'] ?>&view">View</a></td>
    
-   <td class="edit" width="30"><a  href="?addBooks&book_id=<?php echo $row['book_id']; ?>">Edit</a></td>
-   <td class="del" >
+   <td class="edit"><a  href="?addBooks&book_id=<?php echo $row['book_id']; ?>">Edit</a></td>
+   <td class="del">
 <?php echo '<div align="center"><a href="#" id="'.$row['book_id'].'" class="delbutton">Delete</a></div>'; ?>
 
    </td>

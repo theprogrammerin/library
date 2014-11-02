@@ -50,9 +50,9 @@ $("#display").html(html).show();
    </script>
 <style>
 
-.trme:nth-child(2n+1){
+.trme{
 
-	background-color:#CCC;
+	background-color:#FFCC99;
 
 }
 </style>
@@ -95,7 +95,7 @@ $("#display").html(html).show();
 
 
 .trme:hover{
-	background:#D6D6D6;}
+	background:#F90;}
 .trme{text-decoration:none; color:#000; font-size:12px; font-family:Verdana, Geneva, sans-serif;}
 
 .trnone{ text-decoration:none; color:#000; font-size:12px; font-family:Verdana, Geneva, sans-serif;}
@@ -263,7 +263,7 @@ $allb=mysql_num_rows($all);
 
 <table width="100%"  align="center"  border="0" cellspacing="1" class="webkit" style="
  margin-top:0px; border:#666 solid 1px; text-align:center; font-size:12px;">
-  <tr bgcolor="#3B5998" style="font-size:15px; color:white; text-align:center; font-size:12px; font-weight:bold; font-family:Arial, 'Arial Black', 'Arial Narrow';height:30px; ">
+  <tr bgcolor="#F90" style="font-size:15px; color:black; text-align:center; font-size:12px; font-weight:bold; font-family:Arial, 'Arial Black', 'Arial Narrow';height:30px; ">
  <td width="30"></td>
     <td class="webkit" >Date Borrowed</td>
      <td class="webkit" >Title of Books</td>
@@ -482,7 +482,7 @@ if(date('Y')==$i){ echo 'selected="selected"'; ?>
 
 <?php } }?>
 <tr>
-<td colspan="9" bgcolor="#3B5998" height="20"></td>
+<td colspan="9" bgcolor="#F90" height="20"></td>
 </tr>
 </table>
 <?php }?>
