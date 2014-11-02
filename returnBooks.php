@@ -386,58 +386,17 @@ if($borrower['status']=="Signed"){}else
     onclick="OpenPopUp(id,'','',700,400);" class='trnone'> <?php } ?><div class="trdiv">
 	<?php echo date_format(date_create($borrower['due_date']), 'F j, Y '); ?>
 	</div></a></td>
-    <td> <div class="trdiv">
 
-    <?php if($borrower['datereturn']=="0000-00-00"){ ?>
-
-    <?php  if($_GET['id']==$borrower['borrowid']){ ?>
-
-//echo date('Y-m-d');
-
-
-
-<?php
-
-for($i=01;$i<32;$i++){ ?>
-
-<option <?php
-if(date('d')==$i){ echo 'selected="selected"'; ?>
-<?php }else{}
- ?>
-value="<?php  echo $i;?>" <?php echo $i; ?>><?php echo $i; ?></option>
-
-<?php } ?>
-</select>
-
-<select name="byear">
-<option>YYYY</option>
-<?php for($i=1000;$i<2021;$i++){ ?>
-<option
-<?php
-if(date('Y')==$i){ echo 'selected="selected"'; ?>
-<?php }else{}
- ?>
- value="<?php  echo $i;?>" ><?php echo $i; ?></option>
-<?php }?>
-</select>
-
-
-
-    <?php }else{ ?>
-     <?php if($borrower['status']=="Signed"){}else{ ?>
-
-    <a href="" style="margin-right:10px;" id="<?php echo $borrower['loan_id']; ?>"
-    onclick="OpenPopUp(id,'','',700,400);" class='trnone'> <?php } ?>
-
-    <div class="trdiv">
-		Unreturn
-	</div>
-	<?php	}	 ?>
-
-    </div>
-    </a></td>
-    <?php }else{ echo date_format(date_create($borrower['date_in']), 'F j, Y'); } ?>
-
+    <td>
+    <?php
+    if($borrower['date_in'] == '0000-00-00') {
+      echo "Unreturned";
+    }
+    else {
+      echo date_format(date_create($borrower['date_in']), 'F j, Y');
+    }
+    ?>
+  </td>
 
 
 
